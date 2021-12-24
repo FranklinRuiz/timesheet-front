@@ -2,7 +2,7 @@
     <mat-toolbar mat-dialog-title>
         <div class="flex flex-row sm:items-center sm:justify-between">
             <div>
-                <span>Eliminar Labor</span>
+                <span>{{title}}</span>
             </div>
             <button tabindex="-1" mat-icon-button mat-dialog-close>
                 <mat-icon>close</mat-icon>
@@ -10,13 +10,13 @@
         </div>
     </mat-toolbar>
 
-    <div mat-dialog-content class="mt-3">
-        <mat-label>¿Seguro de Eliminar esta Labor?</mat-label>
+    <div mat-dialog-content>
+        <mat-label>{{message}}</mat-label>
     </div>
 
     <div mat-dialog-actions align="end">
         <button mat-button (click)="onNoClick()">Cancelar</button>
-        <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Eliminar</button>
+        <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Eliminar</button>
     </div>
 
 </div>
