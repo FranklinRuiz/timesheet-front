@@ -1,0 +1,179 @@
+<div class="dialog-content-wrapper">
+    <mat-toolbar mat-dialog-title>
+        <div class="flex flex-row sm:items-center sm:justify-between">
+            <div>
+                <span>Nueva Labor</span>
+            </div>
+            <button tabindex="-1" mat-icon-button mat-dialog-close>
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+    </mat-toolbar>
+
+    <div mat-dialog-content class="mt-3">
+        <form [formGroup]="form">
+
+            <div class="grid sm:grid-cols-2 gap-6 w-full">
+                <div class="sm:col-span-1">
+                    <mat-form-field class="fuse-mat-no-subscript w-full">
+                        <mat-label>Nombre labor</mat-label>
+                        <input matInput formControlName="nombre">
+                    </mat-form-field>
+                    <mat-error *ngIf="form.controls['nombre'].errors?.required &&  form.controls['nombre'].touched">
+                        Nombre es obligatorio
+                    </mat-error>
+                </div>
+                <div class="sm:col-span-1">
+                    <mat-form-field class="fuse-mat-no-subscript w-full">
+                        <mat-label>Referencia labor</mat-label>
+                        <input matInput formControlName="referencia">
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="grid sm:grid-cols-3 gap-6 w-full mt-3">
+                <div class="sm:col-span-1">
+                    <mat-form-field class="fuse-mat-no-subscript w-full">
+                        <mat-label>Block</mat-label>
+                        <mat-select formControlName="block">
+                            <mat-option *ngFor="let b of block" [value]="b.block"
+                                (onSelectionChange)="onChangeBlock($event,b)">
+                                {{b.block}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-error *ngIf="form.controls['block'].errors?.required &&  form.controls['block'].touched">
+                        Block es obligatorio
+                    </mat-error>
+                </div>
+                <div class="sm:col-span-1">
+                    <mat-form-field class="fuse-mat-no-subscript w-full">
+                        <mat-label>Veta</mat-label>
+                        <input matInput formControlName="veta" readonly>
+                    </mat-form-field>
+                    <mat-error *ngIf="form.controls['veta'].errors?.required &&  form.controls['veta'].touched">
+                        Veta es obligatorio
+                    </mat-error>
+                </div>
+                <div class="sm:col-span-1">
+                    <mat-form-field class="fuse-mat-no-subscript w-full">
+                        <mat-label>Tajo</mat-label>
+                        <input matInput formControlName="tajo">
+                    </mat-form-field>
+                    <mat-error *ngIf="form.controls['tajo'].errors?.required &&  form.controls['tajo'].touched">
+                        Tajo es obligatorio
+                    </mat-error>
+                </div>
+            </div>
+
+            <div class="grid sm:grid-cols-3 gap-6 w-full mt-3">
+                <div class="sm:col-span-1">
+                    <mat-form-field class="fuse-mat-no-subscript w-full">
+                        <mat-label>Tipo Avance</mat-label>
+                        <mat-select formControlName="tAvance">
+                            <mat-option *ngFor="let t of tipoLabor" [value]="t.tipoAvance"
+                                (onSelectionChange)="onChangeTipoLabor($event,t)">
+                                {{t.tipoAvance}} - {{t.tipoLabor}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-error *ngIf="form.controls['tAvance'].errors?.required &&  form.controls['tAvance'].touched">
+                        Tipo avance es obligatorio
+                    </mat-error>
+                </div>
+                <div class="sm:col-span-1">
+                    <mat-form-field class="fuse-mat-no-subscript w-full">
+                        <mat-label>Fase</mat-label>
+                        <mat-select formControlName="faseP">
+                            <mat-option *ngFor="let f of fase" [value]="f.faseP"
+                                (onSelectionChange)="onChangeFase($event,f)">
+                                {{f.faseP}} - {{f.faseS}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-error *ngIf="form.controls['faseP'].errors?.required &&  form.controls['faseP'].touched">
+                        Fase es obligatorio
+                    </mat-error>
+                </div>
+                <div class="sm:col-span-1">
+                    <mat-form-field class="fuse-mat-no-subscript w-full">
+                        <mat-label>H_V</mat-label>
+                        <input matInput formControlName="hV" readonly>
+                    </mat-form-field>
+                    <mat-error *ngIf="form.controls['hV'].errors?.required &&  form.controls['hV'].touched">
+                        H_V es obligatorio
+                    </mat-error>
+                </div>
+            </div>
+
+            <div class="grid sm:grid-cols-4 gap-6 w-full mt-3">
+                <div class="sm:col-span-1">
+                    <mat-form-field class="fuse-mat-no-subscript w-full">
+                        <mat-label>Nivel</mat-label>
+                        <input matInput formControlName="nivel">
+                    </mat-form-field>
+                    <mat-error *ngIf="form.controls['nivel'].errors?.required &&  form.controls['nivel'].touched">
+                        Nivel es obligatorio
+                    </mat-error>
+                </div>
+                <div class="sm:col-span-1">
+                    <mat-form-field class="fuse-mat-no-subscript w-full">
+                        <mat-label>Seccion</mat-label>
+                        <mat-select formControlName="seccion">
+                            <mat-option *ngFor="let s of seccion" [value]="s.seccion">
+                                {{s.seccion}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-error *ngIf="form.controls['seccion'].errors?.required &&  form.controls['seccion'].touched">
+                        Seccion es obligatorio
+                    </mat-error>
+                </div>
+                <div class="sm:col-span-1">
+                    <mat-form-field class="fuse-mat-no-subscript w-full">
+                        <mat-label>Pto. Cardinal</mat-label>
+                        <mat-select formControlName="ptoCardinal">
+                            <mat-option *ngFor="let p of puntocardinal" [value]="p.cardinal">
+                                {{p.cardinal}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-error
+                        *ngIf="form.controls['ptoCardinal'].errors?.required &&  form.controls['ptoCardinal'].touched">
+                        Pto. cardinal es obligatorio
+                    </mat-error>
+                </div>
+                <div class="sm:col-span-1">
+                    <mat-form-field class="fuse-mat-no-subscript w-full">
+                        <mat-label>Unidad</mat-label>
+                        <input matInput formControlName="und" readonly>
+                    </mat-form-field>
+                    <mat-error *ngIf="form.controls['und'].errors?.required &&  form.controls['und'].touched">
+                        Und. es obligatorio
+                    </mat-error>
+                </div>
+
+            </div>
+
+            <div class="grid sm:grid-cols-1 gap-6 w-full mt-3">
+                <div class="sm:col-span-1">
+                    <mat-form-field class="fuse-mat-no-subscript w-full">
+                        <mat-label>Ruta</mat-label>
+                        <input matInput formControlName="ruta">
+                    </mat-form-field>
+                    <mat-error *ngIf="form.controls['ruta'].errors?.required &&  form.controls['ruta'].touched">
+                        ruta es obligatorio
+                    </mat-error>
+                </div>
+            </div>
+
+
+        </form>
+    </div>
+
+    <div mat-dialog-actions align="end">
+        <button mat-raised-button color="primary" (click)="onGrabar()">GRABAR</button>
+        <button mat-raised-button mat-dialog-close color="accent">CANCELAR</button>
+    </div>
+
+</div>
