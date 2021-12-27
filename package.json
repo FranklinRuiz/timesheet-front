@@ -1,5 +1,5 @@
 {
-    "name": "@timesheet-front",
+    "name": "timesheet-front",
     "version": "14.0.0",
     "description": "TimeSheet Sistema de Asistencia",
     "private": true,
