@@ -1,0 +1,63 @@
+<div class="flex flex-col flex-auto min-w-0">
+    <!-- Header -->
+    <div
+        class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+        <!-- Title and action buttons -->
+        <div class="flex items-center justify-between w-full">
+            <div>
+                <h2 class="text-3xl font-semibold tracking-tight leading-8">Creación de dias festivos</h2>
+            </div>
+            <div class="flex items-center ml-6">
+                <button class="hidden sm:inline-flex ml-3" mat-flat-button [color]="'primary'" (click)="onAddDiaFestivo()">
+                    <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:document-add'"></mat-icon>
+                    <span class="ml-2">Agregar Dia Festivo</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- Main -->
+    <div class="flex-auto p-6 sm:p-10">
+        <div class="flex flex-col p-2 pb-4 bg-card rounded-2xl shadow overflow-hidden">
+            <div class="example-container" *ngIf="tableDiaFestivo">
+                
+                <div class="flex">
+                    <table mat-table [dataSource]="tableDiaFestivo.content" multiTemplateDataRows>
+                        
+                        <ng-container matColumnDef="idDiaFestivo">
+                            <th mat-header-cell *matHeaderCellDef> ID </th>
+                            <td mat-cell *matCellDef="let element"> {{element.idDiaFestivo}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="nombreDiaFestivo"><!--EDITARRRRRRRR-->
+                            <th mat-header-cell *matHeaderCellDef> NOMBRE DIA FESTIVO </th>
+                            <td mat-cell *matCellDef="let element"> {{element.nombreDiaFestivo}} </td><!--EDITARRRRRRRR-->
+                        </ng-container>
+
+                        <ng-container matColumnDef="fechaDiaFestivo"><!--EDITARRRRRRRR-->
+                            <th mat-header-cell *matHeaderCellDef> FECHA DIA FESTIVO </th>
+                            <td mat-cell *matCellDef="let element"> {{element.fechaDiaFestivo}} </td><!--EDITARRRRRRRR-->
+                        </ng-container>
+                        <ng-container matColumnDef="accion">
+                            <th mat-header-cell *matHeaderCellDef> Acciones </th>
+                            <td mat-cell *matCellDef="let element">
+                                <button mat-icon-button (click)="onEditDiaFestivo(element)" matTooltip="Editar registro">
+                                    <mat-icon>edit</mat-icon>
+                                </button>
+                                <button mat-icon-button (click)="onDeleteDiaFestivo(element.idDiaFestivo)"
+                                    matTooltip="Eliminar registro">
+                                    <mat-icon>delete</mat-icon>
+                                </button>
+                            </td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef=" displayedColumnsDiaFestivo"></tr><!--EDITARRRRRRRR-->
+                        <tr mat-row *matRowDef="let row; columns: displayedColumnsDiaFestivo;"></tr><!--EDITARRRRRRRR-->
+                    </table>
+                </div>
+                <mat-paginator [length]="tableDiaFestivo.totalElements" [pageSize]="tableDiaFestivo.size"
+                    [pageSizeOptions]="[5,10,15,20]" showFirstLastButtons (page)="onChangePagination($event)">
+                </mat-paginator>
+            </div>
+        </div>
+    </div>
+</div>

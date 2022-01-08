@@ -1,0 +1,45 @@
+<div class="dialog-content-wrapper">
+    <mat-toolbar mat-dialog-title>
+        <div class="flex flex-row sm:items-center sm:justify-between">
+            <div>
+                <span>Registro Dia Festivo</span>
+            </div>
+            <button tabindex="-1" mat-icon-button mat-dialog-close>
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+    </mat-toolbar>
+
+    <div mat-dialog-content class="mt-3">
+        <form [formGroup]="form">
+
+
+            <mat-form-field class="fuse-mat-no-subscript w-full">
+                <mat-label>Dia Festivo</mat-label>
+                <input matInput formControlName="nombreDiaFestivo">
+            </mat-form-field>
+            <mat-error *ngIf="form.controls['nombreDiaFestivo'].errors?.required && form.controls['nombreDiaFestivo'].touched">
+                El Nombre Dia Festivo es obligatorio
+            </mat-error>
+
+            <mat-form-field class="fuse-mat-no-subscript w-full mt-4">
+                <mat-label>Fecha Dia Festivo</mat-label>
+                <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" formControlName="fechaDiaFestivo" (click)="picker.open()">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+
+
+            <mat-error *ngIf="form.controls['fechaDiaFestivo'].errors?.required && form.controls['fechaDiaFestivo'].touched">
+                La fecha del día festivo es obligatorio
+            </mat-error>
+
+        </form>
+    </div>
+
+    <div mat-dialog-actions align="end">
+        <button mat-raised-button color="primary" (click)="onSave()">GRABAR</button>
+        <button mat-raised-button mat-dialog-close color="accent">CANCELAR</button>
+    </div>
+
+</div>

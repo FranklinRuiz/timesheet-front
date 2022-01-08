@@ -11,9 +11,16 @@ export const defaultNavigation: FuseNavigationItem[] = [
     },
     {
         id   : 'tipoTrabajo',
-        title: 'Tipo de Trabajo',
+        title: 'Tipos de Trabajos',
         type : 'basic',
-        icon : 'heroicons_outline:clipboard-check',
+        icon : 'heroicons_outline:office-building',
         link : '/tipoTrabajo'
+    },
+    {
+        id   : 'diaFestivo',
+        title: 'Dias Festivos',
+        type : 'basic',
+        icon : 'heroicons_outline:calendar',
+        link : '/diaFestivo'//URL
     }
 ];
