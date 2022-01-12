@@ -9,11 +9,18 @@ export const defaultNavigation: FuseNavigationItem[] = [
         icon : 'heroicons_outline:clipboard-check',
         link : '/cargo'
     },
-    // {
-    //     id   : 'medicion',
-    //     title: 'Medición Avances',
-    //     type : 'basic',
-    //     icon : 'heroicons_outline:clipboard-check',
-    //     link : '/avance'
-    // }
+    {
+        id   : 'tipoTrabajo',
+        title: 'Tipos de Trabajos',
+        type : 'basic',
+        icon : 'heroicons_outline:office-building',
+        link : '/tipoTrabajo'
+    },
+    {
+        id   : 'diaFestivo',
+        title: 'Dias Festivos',
+        type : 'basic',
+        icon : 'heroicons_outline:calendar',
+        link : '/diaFestivo'//URL
+    }
 ];
