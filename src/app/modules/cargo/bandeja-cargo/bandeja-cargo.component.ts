@@ -44,9 +44,9 @@ export class BandejaCargoComponent implements OnInit {
   }
 
   onLoadTableCargo() {
-    this.apiService.listCargo(this.pagina, this.size).subscribe((resp) => {
+    this.apiService.listCargo(this.pagina, this.size).subscribe((resp:any) => {
       if (resp) {
-        this.tableCargo = resp;
+        this.tableCargo = resp.data;
       }
     });
   }
@@ -55,8 +55,8 @@ export class BandejaCargoComponent implements OnInit {
     this.pagina = event.pageIndex;
     this.size = event.pageSize;
 
-    this.apiService.listCargo(this.pagina, this.size).subscribe((resp) => {
-      this.tableCargo = resp;
+    this.apiService.listCargo(this.pagina, this.size).subscribe((resp:any) => {
+      this.tableCargo = resp.data;
     });
   }
 
