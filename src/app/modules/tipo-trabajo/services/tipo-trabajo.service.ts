@@ -28,6 +28,11 @@ export class TipoTrabajoService {
   saveTipoTrabajo(values: ITipoTrabajo) {
     return this.http.post(`${this.url}/api/tipo-trabajo/save`, values);
   }
+
+
+  updateTipoTrabajo(values: ITipoTrabajo) {
+    return this.http.post(`${this.url}/api/tipo-trabajo/update`, values);
+  }
   
   deleteTipoTrabajo(idTipoTrabajo: number) {
     return this.http.delete(`${this.url}/api/tipo-trabajo/delete/${idTipoTrabajo}`);

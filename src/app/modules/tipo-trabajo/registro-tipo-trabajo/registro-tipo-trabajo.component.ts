@@ -50,8 +50,8 @@ export class RegistroTipoTrabajoComponent implements OnInit {
 
     const data = this.form.getRawValue();
 
-    const newCargo: ITipoTrabajo = {
-      idTipoTrabajo: this.data ? this.data.idCargo : 0,
+    const newTipoTrabajo: ITipoTrabajo = {
+      idTipoTrabajo: this.data ? this.data.idTipoTrabajo : 0,
       abreviatura: data.abreviatura,
       nombreTipoTrabajo: data.nombreTipoTrabajo, 
     };
@@ -62,7 +62,7 @@ export class RegistroTipoTrabajoComponent implements OnInit {
       this.mensaje = 'tipo de trabajo actualizado con éxito.';
     }
 
-    this.apiService.saveTipoTrabajo(newCargo).subscribe((response) => {
+    this.apiService.saveTipoTrabajo(newTipoTrabajo).subscribe((response) => {
       if (response) {
         this.matSnackBar.open(
           this.mensaje,

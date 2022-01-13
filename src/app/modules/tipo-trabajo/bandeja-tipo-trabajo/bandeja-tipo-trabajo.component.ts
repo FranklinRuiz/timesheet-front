@@ -33,7 +33,7 @@ export class BandejaTipoTrabajoComponent implements OnInit {
   onLoadTableTipoTrabajo(){
     this.apiService.listTipoTrabajo(this.pagina, this.size).subscribe((resp) => {
       console.log('resp de tipo trabajo', resp);
-      this.tabletipoTrabajo = resp;
+      this.tabletipoTrabajo = resp.data;
     })
   }
 
@@ -42,7 +42,7 @@ export class BandejaTipoTrabajoComponent implements OnInit {
     this.size = event.pageSize;
 
     this.apiService.listTipoTrabajo(this.pagina, this.size).subscribe((resp) => {
-      this.tabletipoTrabajo = resp;
+      this.tabletipoTrabajo = resp.data;
     });
   }
 

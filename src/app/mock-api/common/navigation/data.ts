@@ -22,5 +22,12 @@ export const defaultNavigation: FuseNavigationItem[] = [
         type : 'basic',
         icon : 'heroicons_outline:calendar',
         link : '/diaFestivo'//URL
+    },
+    {
+        id   : 'horario',
+        title: 'Horarios',
+        type : 'basic',
+        icon : 'heroicons_outline:clock',
+        link : '/horario'//URL
     }
 ];

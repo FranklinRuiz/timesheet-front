@@ -29,7 +29,7 @@ export class BandejaDiaFestivoComponent implements OnInit {
     this.apiService.listDiaFestivo(this.pagina, this.size).subscribe((resp) => {
       if (resp) {
         console.log("onLoadTableDiaFestivo: " , resp);
-        this.tableDiaFestivo = resp;
+        this.tableDiaFestivo = resp.data;
       }
     });
   }
@@ -47,7 +47,7 @@ export class BandejaDiaFestivoComponent implements OnInit {
     this.pagina = event.pageIndex;
     this.size = event.pageSize;
     this.apiService.listDiaFestivo(this.pagina, this.size).subscribe((resp) => {
-      this.tableDiaFestivo = resp;
+      this.tableDiaFestivo = resp.data;
     });
   }
   onEditDiaFestivo(data: IDiaFestivo) {

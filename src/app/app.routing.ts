@@ -62,6 +62,7 @@ export const appRoutes: Route[] = [
             { path: 'cargo', loadChildren: () => import('app/modules/cargo/cargo.module').then(m => m.CargoModule) },
             { path: 'tipoTrabajo', loadChildren: () => import('app/modules/tipo-trabajo/tipo-trabajo.module').then(m => m.TipoTrabajoModule) },
             { path: 'diaFestivo', loadChildren: () => import('app/modules/dia-festivo/dia-festivo.module').then(m => m.DiaFestivoModule) },
+            { path: 'horario', loadChildren: () => import('app/modules/horario/horario.module').then(m => m.HorarioModule) },
         ]
     },
 ];

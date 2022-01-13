@@ -28,6 +28,7 @@ export interface Pageable {
 }
 
 export interface TipoTrabajoPage {
+    data: TipoTrabajoPage;
     content: ITipoTrabajo[];
     pageable: Pageable;
     last: boolean;

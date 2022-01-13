@@ -1,7 +1,7 @@
-export interface IDiaFestivo {
-    idDiaFestivo: number;
-    nombreDiaFestivo: string;
-    fechaDiaFestivo: string;
+export interface IHorario {
+    idHorario: number;
+    horaInicio: string;
+    horaFin: string;
 }
 
 export interface Sort {
@@ -25,9 +25,8 @@ export interface Pageable {
     paged: boolean;
 }
 
-export interface DiaFestivoPage {
-    data: DiaFestivoPage;
-    content: IDiaFestivo[];
+export interface HorarioPage {
+    content: IHorario[];
     pageable: Pageable;
     last: boolean;
     totalElements: number;
