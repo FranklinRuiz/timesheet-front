@@ -29,5 +29,12 @@ export const defaultNavigation: FuseNavigationItem[] = [
         type : 'basic',
         icon : 'heroicons_outline:clock',
         link : '/horario'//URL
+    },
+    {
+        id: 'personas',
+        title: 'Personas' ,
+        type : 'basic',
+        icon : 'heroicons_outline:user',
+        link : '/personas'
     }
 ];
