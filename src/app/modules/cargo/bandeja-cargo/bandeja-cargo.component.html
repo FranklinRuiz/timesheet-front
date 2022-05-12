@@ -13,7 +13,7 @@
                 <!-- Actions -->
                 <div class="flex items-center mt-6 sm:mt-0 sm:ml-2 space-x-3">
                     <div>
-                        <mat-form-field class="fuse-mat-dense fuse-mat-no-subscript fuse-mat-rounded w-full min-w-50">
+                        <mat-form-field class="fuse-mat-dense fuse-mat-no-subscript fuse-mat-rounded min-w-50">
                             <button mat-icon-button type="button" matPrefix (click)="onRefresh()">
                                 <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:x'"></mat-icon>
                             </button>
@@ -34,7 +34,7 @@
     <!-- Main -->
     <div class="flex-auto p-6 sm:p-10">
         <div class="flex flex-col p-2 pb-4 bg-card rounded-2xl shadow overflow-hidden">
-            <div class="example-container" *ngIf="tableCargo">
+            <div class="example-container" *ngIf="!!tableCargo">
                 <div class="flex">
                     <table mat-table [dataSource]="tableCargo.content" multiTemplateDataRows>
 
@@ -77,6 +77,9 @@
                 <mat-paginator [length]="tableCargo.totalElements" [pageSize]="tableCargo.size"
                     [pageSizeOptions]="[5,10,15,20]" showFirstLastButtons (page)="onChangePagination($event)">
                 </mat-paginator>
+            </div>
+            <div *ngIf="!tableCargo">
+                <div class="text-3xl pt-2 font-semibold tracking-tight text-center">¡No hay datos!</div>
             </div>
         </div>
 

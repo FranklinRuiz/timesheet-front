@@ -46,7 +46,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
                 if (error.status === 0) {
                     this._fuseConfirmationService.open({
-                        "title": "Error",
+                        "title": "ERROR INESPERADO",
                         "message": error.message,
                         "icon": {
                             "show": true,
