@@ -1,7 +1,8 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { GeneralPage } from 'app/shared/interface-paginator';
 import { environment } from 'environments/environment';
-import { CargoPage, ICargo } from '../interface/cargo.interface';
+import {  ICargo } from '../interface/cargo.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -13,12 +14,13 @@ export class CargoService {
   constructor(private http: HttpClient) { }
 
 
-  listCargo(pagina: number, size: number) {
+  listCargo(pagina: number, size: number, nombre: string) {
     let params = new HttpParams();
     params = params.append('page', pagina);
     params = params.append('size', size);
+    params = params.append('nombre', nombre);
     params = params.append('sort', 'idCargo,desc');
-    return this.http.get<CargoPage>(`${this.url}/api/cargo/list`, { params: params });
+    return this.http.get<GeneralPage>(`${this.url}/api/cargo/list`, { params: params });
   }
 
   saveCargo(values: ICargo) {

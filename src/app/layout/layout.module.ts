@@ -1,28 +1,24 @@
 import { NgModule } from '@angular/core';
 import { LayoutComponent } from 'app/layout/layout.component';
-import { EmptyLayoutModule } from 'app/layout/layouts/empty/empty.module'; 
-import { ClassyLayoutModule } from 'app/layout/layouts/vertical/classy/classy.module';
-import { SharedModule } from 'app/shared/shared.module';
 
-const layoutModules = [
-    // Empty
-    EmptyLayoutModule, 
-    ClassyLayoutModule,
-];
+import { SharedModule } from 'app/shared/shared.module';
+import { EmptyLayoutModule } from './layouts/empty/empty.module';
+import { EnterpriseLayoutModule } from './layouts/enterprise/enterprise.module';
 
 @NgModule({
     declarations: [
         LayoutComponent
     ],
-    imports     : [
-        SharedModule, 
-        ...layoutModules
+    imports: [
+        SharedModule,
+        EnterpriseLayoutModule,
+        EmptyLayoutModule
     ],
-    exports     : [
+    exports: [
         LayoutComponent,
-        ...layoutModules
+        EnterpriseLayoutModule,
+        EmptyLayoutModule
     ]
 })
-export class LayoutModule
-{
+export class LayoutModule {
 }

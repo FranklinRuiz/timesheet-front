@@ -10,16 +10,15 @@ import { InitialDataResolver } from 'app/app.resolvers';
 export const appRoutes: Route[] = [
 
     // Redirect empty path to '/example'
-    {
-        path: '',
-        pathMatch: 'full',
-        redirectTo: 'example'
-    },
-    {
-        path: 'signed-in-redirect',
-        pathMatch: 'full',
-        redirectTo: 'example'
-    },
+    { path: '', pathMatch: 'full', redirectTo: 'example' },
+
+    // Redirect signed in user to the '/example'
+    //
+    // After the user signs in, the sign in page will redirect the user to the 'signed-in-redirect'
+    // path. Below is another redirection for that path to redirect the user to the desired
+    // location. This is a small convenience to keep all main routes together here on this file.
+    { path: 'signed-in-redirect', pathMatch: 'full', redirectTo: 'example' },
+
     // Auth routes for guests
     {
         path: '',
@@ -48,6 +47,18 @@ export const appRoutes: Route[] = [
         ]
     },
 
+    // Landing routes
+    {
+        path: '',
+        component: LayoutComponent,
+        data: {
+            layout: 'empty'
+        },
+        children: [
+            { path: 'home', loadChildren: () => import('app/modules/landing/home/home.module').then(m => m.LandingHomeModule) },
+        ]
+    },
+
     // Admin routes
     {
         path: '',
@@ -63,7 +74,6 @@ export const appRoutes: Route[] = [
             { path: 'tipoTrabajo', loadChildren: () => import('app/modules/tipo-trabajo/tipo-trabajo.module').then(m => m.TipoTrabajoModule) },
             { path: 'diaFestivo', loadChildren: () => import('app/modules/dia-festivo/dia-festivo.module').then(m => m.DiaFestivoModule) },
             { path: 'horario', loadChildren: () => import('app/modules/horario/horario.module').then(m => m.HorarioModule) },
-            { path: 'personas', loadChildren: () => import('app/modules/personas/personas.module').then(m => m.PersonasModule) },
         ]
     },
 ];

@@ -1,19 +1,32 @@
 <div class="flex flex-col flex-auto min-w-0">
 
     <!-- Header -->
-
-    <div
-        class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
-        <!-- Title and action buttons -->
-        <div class="flex items-center justify-between w-full">
-            <div>
-                <h2 class="text-3xl font-semibold tracking-tight leading-8">Creación de cargos</h2>
-            </div>
-            <div class="flex items-center ml-6">
-                <button class="hidden sm:inline-flex ml-3" mat-flat-button [color]="'primary'" (click)="onAddCargo()">
-                    <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:document-add'"></mat-icon>
-                    <span class="ml-2">Agregar Cargo</span>
-                </button>
+    <div class="bg-card">
+        <div class="flex flex-col w-full max-w-screen-xl mx-auto px-6 sm:px-8">
+            <div class="flex flex-col sm:flex-row flex-auto sm:items-center min-w-0 my-8">
+                <!-- Avatar and name -->
+                <div class="flex flex-auto items-center min-w-0">
+                    <div class="flex flex-col min-w-0">
+                        <div class="text-4xl font-extrabold tracking-tight leading-none">Lista de cargos</div>
+                    </div>
+                </div>
+                <!-- Actions -->
+                <div class="flex items-center mt-6 sm:mt-0 sm:ml-2 space-x-3">
+                    <div>
+                        <mat-form-field class="fuse-mat-dense fuse-mat-no-subscript fuse-mat-rounded w-full min-w-50">
+                            <button mat-icon-button type="button" matPrefix (click)="onRefresh()">
+                                <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:x'"></mat-icon>
+                            </button>
+                            <input matInput [autocomplete]="'off'" [placeholder]="'Buscar por nombre... '"
+                                matTooltip="Presione Enter para buscar" [(ngModel)]="nombreCargo"
+                                (keyup.enter)="onLoadTableCargo()">
+                        </mat-form-field>
+                    </div>
+                    <button class="fuse-mat-button-rounded" mat-flat-button [color]="'primary'" (click)="onAddCargo()">
+                        <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:document-add'"></mat-icon>
+                        <span class="ml-2">Nuevo Cargo</span>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -43,7 +56,7 @@
                             </td>
                         </ng-container>
 
-                        <ng-container matColumnDef="accion" >
+                        <ng-container matColumnDef="accion">
                             <th mat-header-cell *matHeaderCellDef class="width-action"> Acciones </th>
                             <td mat-cell *matCellDef="let element" class="width-action">
                                 <button mat-icon-button (click)="onEditCargo(element)" matTooltip="Editar registro">

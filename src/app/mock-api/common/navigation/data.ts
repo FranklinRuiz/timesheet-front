@@ -3,38 +3,79 @@ import { FuseNavigationItem } from '@fuse/components/navigation';
 
 export const defaultNavigation: FuseNavigationItem[] = [
     {
-        id   : 'cargo',
+        id: 'cargo',
         title: 'Cargos',
-        type : 'basic',
-        icon : 'heroicons_outline:clipboard-check',
-        link : '/cargo'
+        type: 'basic',
+        icon: 'heroicons_outline:clipboard-check',
+        link: '/cargo'
     },
     {
-        id   : 'tipoTrabajo',
-        title: 'Tipos de Trabajos',
-        type : 'basic',
-        icon : 'heroicons_outline:office-building',
-        link : '/tipoTrabajo'
+        id: 'tipoTrabajo',
+        title: 'Tipo de Trabajo',
+        type: 'basic',
+        icon: 'heroicons_outline:office-building',
+        link: '/tipoTrabajo'
     },
     {
-        id   : 'diaFestivo',
+        id: 'diaFestivo',
         title: 'Dias Festivos',
-        type : 'basic',
-        icon : 'heroicons_outline:calendar',
-        link : '/diaFestivo'//URL
+        type: 'basic',
+        icon: 'heroicons_outline:calendar',
+        link: '/diaFestivo'
     },
     {
-        id   : 'horario',
+        id: 'horario',
         title: 'Horarios',
-        type : 'basic',
-        icon : 'heroicons_outline:clock',
-        link : '/horario'//URL
+        type: 'basic',
+        icon: 'heroicons_outline:clock',
+        link: '/horario'
+    }
+];
+export const compactNavigation: FuseNavigationItem[] = [
+    {
+        id: 'example',
+        title: 'Example2',
+        type: 'basic',
+        icon: 'heroicons_outline:chart-pie',
+        link: '/example'
+    }
+];
+export const futuristicNavigation: FuseNavigationItem[] = [
+    {
+        id: 'example',
+        title: 'Example3',
+        type: 'basic',
+        icon: 'heroicons_outline:chart-pie',
+        link: '/example'
+    }
+];
+export const horizontalNavigation: FuseNavigationItem[] = [
+    {
+        id: 'cargo',
+        title: 'Cargos',
+        type: 'basic',
+        icon: 'heroicons_outline:clipboard-check',
+        link: '/cargo'
     },
     {
-        id: 'personas',
-        title: 'Personas' ,
-        type : 'basic',
-        icon : 'heroicons_outline:user',
-        link : '/personas'
+        id: 'tipoTrabajo',
+        title: 'Tipo de Trabajo',
+        type: 'basic',
+        icon: 'heroicons_outline:office-building',
+        link: '/tipoTrabajo'
+    },
+    {
+        id: 'diaFestivo',
+        title: 'Dias Festivos',
+        type: 'basic',
+        icon: 'heroicons_outline:calendar',
+        link: '/diaFestivo'
+    },
+    {
+        id: 'horario',
+        title: 'Horarios',
+        type: 'basic',
+        icon: 'heroicons_outline:clock',
+        link: '/horario'
     }
 ];

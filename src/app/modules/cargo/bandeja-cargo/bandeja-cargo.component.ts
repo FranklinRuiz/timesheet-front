@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { ModalDeleteComponent } from 'app/shared/modal-delete/modal-delete.component';
-import { CargoPage, ICargo } from '../interface/cargo.interface';
+import { FuseConfirmationService } from '@fuse/services/confirmation';
+import { GeneralPage } from 'app/shared/interface-paginator';
+import { ICargo } from '../interface/cargo.interface';
 import { RegistroCargoComponent } from '../registro-cargo/registro-cargo.component';
 import { CargoService } from '../service/service-cargo.service';
 
@@ -17,18 +17,24 @@ export class BandejaCargoComponent implements OnInit {
   displayedColumnsCargo: string[] = ['codigoCargo', 'nombreCargo', 'accion'];
   dataSourceCargo: any[];
 
-  tableCargo: CargoPage;
+  tableCargo: GeneralPage;
 
+  nombreCargo: string = '';
   pagina: number = 0;
   size: number = 10;
 
   constructor(
     public dialog: MatDialog,
     private apiService: CargoService,
-    private matSnackBar: MatSnackBar
+    private _fuseConfirmationService: FuseConfirmationService
   ) { }
 
   ngOnInit(): void {
+    this.onLoadTableCargo();
+  }
+
+  onRefresh() {
+    this.nombreCargo = '';
     this.onLoadTableCargo();
   }
 
@@ -44,7 +50,7 @@ export class BandejaCargoComponent implements OnInit {
   }
 
   onLoadTableCargo() {
-    this.apiService.listCargo(this.pagina, this.size).subscribe((resp:any) => {
+    this.apiService.listCargo(this.pagina, this.size, this.nombreCargo).subscribe((resp: any) => {
       if (resp) {
         this.tableCargo = resp.data;
       }
@@ -55,7 +61,7 @@ export class BandejaCargoComponent implements OnInit {
     this.pagina = event.pageIndex;
     this.size = event.pageSize;
 
-    this.apiService.listCargo(this.pagina, this.size).subscribe((resp:any) => {
+    this.apiService.listCargo(this.pagina, this.size, this.nombreCargo).subscribe((resp: any) => {
       this.tableCargo = resp.data;
     });
   }
@@ -74,15 +80,11 @@ export class BandejaCargoComponent implements OnInit {
   }
 
   onDeleteCargo(idCargo: number) {
-    const dialogRef = this.dialog.open(ModalDeleteComponent, {
-      width: '400px',
-      data: {
-        title: 'Eliminar cargo registrado',
-        message: '¿esta seguro de eliminar este cargo?'
-      }
-    });
+    console.log('llego delete')
+    const dialogRef = this._fuseConfirmationService.open();
+
     dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
+      if (result == 'confirmed') {
         this.apiService.deleteCargo(idCargo).subscribe((resp) => {
           this.onLoadTableCargo();
         });

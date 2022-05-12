@@ -55,20 +55,31 @@ export class RegistroCargoComponent implements OnInit {
 
     if (!this.data) {
       this.mensaje = 'Cargo registrado con éxito.';
+      this.apiService.saveCargo(newCargo).subscribe((response) => {
+        if (response) {
+          this.matSnackBar.open(
+            this.mensaje,
+            'Cerrar',
+            { duration: 3000, verticalPosition: 'top', horizontalPosition: 'end' }
+          );
+          this.dialogRef.close(true);
+        }
+      });
     } else {
       this.mensaje = 'Cargo actualizado con éxito.';
+      this.apiService.updateCargo(newCargo).subscribe((response) => {
+        if (response) {
+          this.matSnackBar.open(
+            this.mensaje,
+            'Cerrar',
+            { duration: 3000, verticalPosition: 'top', horizontalPosition: 'end' }
+          );
+          this.dialogRef.close(true);
+        }
+      });
     }
 
-    this.apiService.saveCargo(newCargo).subscribe((response) => {
-      if (response) {
-        this.matSnackBar.open(
-          this.mensaje,
-          'Cerrar',
-          { duration: 3000, verticalPosition: 'top', horizontalPosition: 'end' }
-        );
-        this.dialogRef.close(true);
-      }
-    });
+
 
   }
 }

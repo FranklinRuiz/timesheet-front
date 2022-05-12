@@ -73,7 +73,7 @@ export class UserComponent implements OnInit, OnDestroy
      *
      * @param status
      */
-    updateUserStatus(estado: string): void
+    updateUserStatus(status: string): void
     {
         // Return if user is not available
         if ( !this.user )
@@ -84,7 +84,7 @@ export class UserComponent implements OnInit, OnDestroy
         // Update the user
         this._userService.update({
             ...this.user,
-            estado
+            status
         }).subscribe();
     }
 

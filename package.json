@@ -1,7 +1,9 @@
 {
-    "name": "timesheet-front",
+    "name": "@fuse/starter",
     "version": "14.0.0",
-    "description": "TimeSheet Sistema de Asistencia",
+    "description": "Fuse - Angular Admin Template and Starter Project",
+    "author": "https://themeforest.net/user/srcn",
+    "license": "https://themeforest.net/licenses/standard",
     "private": true,
     "scripts": {
         "ng": "ng",
@@ -45,6 +47,7 @@
         "@angular-eslint/eslint-plugin-template": "12.6.1",
         "@angular-eslint/schematics": "12.6.1",
         "@angular-eslint/template-parser": "12.6.1",
+        "@angular/cli": "13.0.2",
         "@angular/compiler-cli": "13.0.1",
         "@tailwindcss/aspect-ratio": "0.3.0",
         "@tailwindcss/line-clamp": "0.2.2",

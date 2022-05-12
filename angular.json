@@ -17,7 +17,7 @@
                 "build": {
                     "builder": "@angular-devkit/build-angular:browser",
                     "options": {
-                        "outputPath": "dist/timesheet-front",
+                        "outputPath": "dist/sgsi-front",
                         "index": "src/index.html",
                         "main": "src/main.ts",
                         "polyfills": "src/polyfills.ts",
@@ -139,7 +139,6 @@
     },
     "defaultProject": "fuse",
     "cli": {
-      "analytics": "40e2a225-bdbd-43f2-8fb2-4f7830c8bca3",
         "defaultCollection": "@angular-eslint/schematics"
     }
 }

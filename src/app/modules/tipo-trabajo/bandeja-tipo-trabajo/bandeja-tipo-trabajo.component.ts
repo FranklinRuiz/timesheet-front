@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
-import { ModalDeleteComponent } from 'app/shared/modal-delete/modal-delete.component';
 import { ITipoTrabajo, TipoTrabajoPage } from '../interfaces/tipo-trabajo';
 import { RegistroTipoTrabajoComponent } from '../registro-tipo-trabajo/registro-tipo-trabajo.component';
 import { TipoTrabajoService } from '../services/tipo-trabajo.service';
@@ -75,20 +74,7 @@ export class BandejaTipoTrabajoComponent implements OnInit {
 
 
   onDeleteTipoTrabajo(idTipoTrabajo: number) {
-    const dialogRef = this.dialog.open(ModalDeleteComponent, {
-      width: '400px',
-      data: {
-        title: 'Eliminar tipo trabajo registrado',
-        message: '¿esta seguro de eliminar este tipo de trabajo?'
-      }
-    });
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        this.apiService.deleteTipoTrabajo(idTipoTrabajo).subscribe((resp) => {
-          this.onLoadTableTipoTrabajo();
-        });
-      }
-    });
+ 
   }
 
 

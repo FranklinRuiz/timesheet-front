@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ModalDeleteComponent } from 'app/shared/modal-delete/modal-delete.component';
 import { HorarioPage, IHorario } from '../interface/horario';
 import { RegistroHorarioComponent } from '../registro-horario/registro-horario.component';
 import { HorarioService } from '../service/horario.service';
@@ -74,20 +73,7 @@ export class BandejaHorarioComponent implements OnInit {
   }
 
   onDeleteHorario(idHorario: number) {
-    const dialogRef = this.dialog.open(ModalDeleteComponent, {
-      width: '400px',
-      data: {
-        title: 'Eliminar horario registrado',
-        message: '¿esta seguro de eliminar este horario?'
-      }
-    });
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        this.apiService.deleteHorario(idHorario).subscribe((resp) => {
-          this.onLoadTableHorario();
-        });
-      }
-    });
+  
   }
 
 }

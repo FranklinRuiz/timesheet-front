@@ -1,9 +1,8 @@
-export interface User {
-    idUsuario: number;
-    usuario: string;
-    nombre: string;
-    correo: string;
+export interface User
+{
+    id: string;
+    name: string;
+    email: string;
     avatar?: string;
-    estado?: string;
-    authorities?:any [];
+    status?: string;
 }

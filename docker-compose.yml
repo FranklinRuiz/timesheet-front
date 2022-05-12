@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  api:
+    container_name: sgsi-frontend
+    image: sgsi-frontend
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - 80:80
+    restart: always

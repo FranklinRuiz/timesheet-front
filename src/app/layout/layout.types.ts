@@ -1,5 +1,4 @@
 export type Layout =
     | 'empty'
-    // Vertical
-    | 'classy'
-  
+    // Horizontal
+    | 'enterprise';

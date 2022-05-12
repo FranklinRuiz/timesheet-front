@@ -42,8 +42,8 @@ export class AuthSignInComponent implements OnInit {
     ngOnInit(): void {
         // Create the form
         this.signInForm = this._formBuilder.group({
-            usuario: ['admin', [Validators.required]],
-            password: ['12345', Validators.required],
+            username: ['fasto', [Validators.required]],
+            password: ['12345678', Validators.required],
             rememberMe: ['']
         });
     }
@@ -68,19 +68,37 @@ export class AuthSignInComponent implements OnInit {
         this.showAlert = false;
 
         // Sign in
-        this._authService.signIn(this.signInForm.value).subscribe(() => {
-            const redirectURL = this._activatedRoute.snapshot.queryParamMap.get('redirectURL') || '/signed-in-redirect';
-            // Navigate to the redirect url
-            this._router.navigateByUrl(redirectURL);
-        }, (response) => {
-            this.signInForm.enable();
-            this.signInNgForm.resetForm();
-            this.alert = {
-                type: 'error',
-                message: 'Usuario o contraseña incorrecta'
-            };
-            this.showAlert = true;
-        }
-        );
+        this._authService.signIn(this.signInForm.value)
+            .subscribe(
+                () => {
+
+                    // Set the redirect url.
+                    // The '/signed-in-redirect' is a dummy url to catch the request and redirect the user
+                    // to the correct page after a successful sign in. This way, that url can be set via
+                    // routing file and we don't have to touch here.
+                    const redirectURL = this._activatedRoute.snapshot.queryParamMap.get('redirectURL') || '/signed-in-redirect';
+
+                    // Navigate to the redirect url
+                    this._router.navigateByUrl(redirectURL);
+
+                },
+                (response) => {
+
+                    // Re-enable the form
+                    this.signInForm.enable();
+
+                    // Reset the form
+                    this.signInNgForm.resetForm();
+
+                    // Set the alert
+                    this.alert = {
+                        type: 'error',
+                        message: 'Usuario o contraseña incorrecto'
+                    };
+
+                    // Show the alert
+                    this.showAlert = true;
+                }
+            );
     }
 }

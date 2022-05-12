@@ -1,4 +1,4 @@
-# TimeSheet - Sistema de asistencia
+# SGC - Sistema de Gestión de Ciberseguridad
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli)
 
