@@ -28,7 +28,7 @@ export class CargoService {
   }
 
   updateCargo(values: ICargo) {
-    return this.http.post(`${this.url}/api/cargo/update`, values);
+    return this.http.put(`${this.url}/api/cargo/update`, values);
   }
 
 

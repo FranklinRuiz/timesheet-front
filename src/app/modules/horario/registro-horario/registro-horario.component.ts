@@ -29,6 +29,7 @@ export class RegistroHorarioComponent implements OnInit {
 
   private builform(): void {
     this.form = new FormGroup({
+      nombre: new FormControl(this.data?.nombre, Validators.required),
       horaInicio: new FormControl(this.data?.horaInicio, Validators.required),
       horaFin: new FormControl(this.data?.horaFin, Validators.required),
     });
@@ -48,26 +49,35 @@ export class RegistroHorarioComponent implements OnInit {
 
     const newHorario: IHorario = {
       idHorario: this.data ? this.data.idHorario : 0,
+      nombre: data.nombre,
       horaInicio: data.horaInicio,
       horaFin: data.horaFin,
     };
 
     if (!this.data) {
       this.mensaje = 'Horario registrado con éxito.';
+      this.apiService.saveHorario(newHorario).subscribe((response) => {
+        if (response) {
+          this.matSnackBar.open(
+            this.mensaje,
+            'Cerrar',
+            { duration: 3000, verticalPosition: 'top', horizontalPosition: 'end' }
+          );
+          this.dialogRef.close(true);
+        }
+      });
     } else {
       this.mensaje = 'Horario actualizado con éxito.';
+      this.apiService.updateHorario(newHorario).subscribe((response) => {
+        if (response) {
+          this.matSnackBar.open(
+            this.mensaje,
+            'Cerrar',
+            { duration: 3000, verticalPosition: 'top', horizontalPosition: 'end' }
+          );
+          this.dialogRef.close(true);
+        }
+      });
     }
-
-    this.apiService.saveHorario(newHorario).subscribe((response) => {
-      if (response) {
-        this.matSnackBar.open(
-          this.mensaje,
-          'Cerrar',
-          { duration: 3000, verticalPosition: 'top', horizontalPosition: 'end' }
-        );
-        this.dialogRef.close(true);
-      }
-    });
-
   }
 }

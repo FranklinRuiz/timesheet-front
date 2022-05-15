@@ -17,6 +17,13 @@ export const defaultNavigation: FuseNavigationItem[] = [
         link: '/tipoTrabajo'
     },
     {
+        id: 'personal',
+        title: 'Personal',
+        type: 'basic',
+        icon: 'heroicons_outline:user-group',
+        link: '/personal'
+    },
+    {
         id: 'diaFestivo',
         title: 'Dias Festivos',
         type: 'basic',
@@ -63,6 +70,13 @@ export const horizontalNavigation: FuseNavigationItem[] = [
         type: 'basic',
         icon: 'heroicons_outline:office-building',
         link: '/tipoTrabajo'
+    },
+    {
+        id: 'personal',
+        title: 'Personal',
+        type: 'basic',
+        icon: 'heroicons_outline:user-group',
+        link: '/personal'
     },
     {
         id: 'diaFestivo',

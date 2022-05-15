@@ -80,8 +80,7 @@ export class BandejaCargoComponent implements OnInit {
   }
 
   onDeleteCargo(idCargo: number) {
-    console.log('llego delete')
-    const dialogRef = this._fuseConfirmationService.open();
+    const dialogRef = this._fuseConfirmationService.delete();
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result == 'confirmed') {

@@ -1,7 +1,8 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { GeneralPage } from 'app/shared/interface-paginator';
 import { environment } from 'environments/environment';
-import { HorarioPage, IHorario } from '../interface/horario';
+import {  IHorario } from '../interface/horario';
 
 @Injectable({
   providedIn: 'root'
@@ -13,12 +14,13 @@ export class HorarioService {
   constructor(private http: HttpClient) { }
 
 
-  listHorario(pagina: number, size: number) {
+  listHorario(pagina: number, size: number, nombre: string) {
     let params = new HttpParams();
     params = params.append('page', pagina);
     params = params.append('size', size);
+    params = params.append('nombre', nombre);
     params = params.append('sort', 'idHorario,desc');
-    return this.http.get<HorarioPage>(`${this.url}/api/horario/list`, { params: params });
+    return this.http.get<GeneralPage>(`${this.url}/api/horario/list`, { params: params });
   }
 
   saveHorario(values: IHorario) {
@@ -26,7 +28,7 @@ export class HorarioService {
   }
 
   updateHorario(values: IHorario) {
-    return this.http.post(`${this.url}/api/horario/update`, values);
+    return this.http.put(`${this.url}/api/horario/update`, values);
   }
 
 

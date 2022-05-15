@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { HorarioPage, IHorario } from '../interface/horario';
+import { FuseConfirmationService } from '@fuse/services/confirmation';
+import { GeneralPage } from 'app/shared/interface-paginator';
+import { IHorario } from '../interface/horario';
 import { RegistroHorarioComponent } from '../registro-horario/registro-horario.component';
 import { HorarioService } from '../service/horario.service';
 
@@ -13,27 +14,33 @@ import { HorarioService } from '../service/horario.service';
 })
 export class BandejaHorarioComponent implements OnInit {
 
-  displayedColumnsHorario: string[] = ['idHorario', 'horaInicio', 'horaFin', 'accion'];
+  displayedColumnsHorario: string[] = ['nombre', 'horaInicio', 'horaFin', 'accion'];
   dataSourceHorario: any[];
 
-  tableHorario: HorarioPage;
+  tableHorario: GeneralPage;
 
+  nombreHorario: string = '';
   pagina: number = 0;
   size: number = 10;
 
   constructor(
     public dialog: MatDialog,
     private apiService: HorarioService,
-    private matSnackBar: MatSnackBar
+    private _fuseConfirmationService: FuseConfirmationService
   ) { }
 
   ngOnInit(): void {
     this.onLoadTableHorario();
   }
 
+  onRefresh() {
+    this.nombreHorario = '';
+    this.onLoadTableHorario();
+  }
+
   onAddHorario() {
     const dialogRef = this.dialog.open(RegistroHorarioComponent, {
-      width: '500px'
+      width: '400px'
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
@@ -43,7 +50,7 @@ export class BandejaHorarioComponent implements OnInit {
   }
 
   onLoadTableHorario() {
-    this.apiService.listHorario(this.pagina, this.size).subscribe((resp:any) => {
+    this.apiService.listHorario(this.pagina, this.size, this.nombreHorario).subscribe((resp: any) => {
       if (resp) {
         this.tableHorario = resp.data;
       }
@@ -54,7 +61,7 @@ export class BandejaHorarioComponent implements OnInit {
     this.pagina = event.pageIndex;
     this.size = event.pageSize;
 
-    this.apiService.listHorario(this.pagina, this.size).subscribe((resp:any) => {
+    this.apiService.listHorario(this.pagina, this.size, this.nombreHorario).subscribe((resp: any) => {
       this.tableHorario = resp.data;
     });
   }
@@ -62,7 +69,7 @@ export class BandejaHorarioComponent implements OnInit {
 
   onEditHorario(data: IHorario) {
     const dialogRef = this.dialog.open(RegistroHorarioComponent, {
-      width: '500px',
+      width: '400px',
       data: data
     });
     dialogRef.afterClosed().subscribe((result) => {
@@ -73,7 +80,15 @@ export class BandejaHorarioComponent implements OnInit {
   }
 
   onDeleteHorario(idHorario: number) {
-  
+    const dialogRef = this._fuseConfirmationService.delete();
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result == 'confirmed') {
+        this.apiService.deleteHorario(idHorario).subscribe((resp) => {
+          this.onLoadTableHorario();
+        });
+      }
+    });
   }
 
 }

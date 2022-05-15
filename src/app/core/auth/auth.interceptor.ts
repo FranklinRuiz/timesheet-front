@@ -76,7 +76,7 @@ export class AuthInterceptor implements HttpInterceptor {
                     // Reload the app
                     location.reload();
                 }
-                else if (error.status !== 0 && error.status !== 400 && error.status !== 401) {
+                else if (error.status !== 0 && error.status !== 401) {
                     this._fuseConfirmationService.open({
                         "title": error.error.shortMessage,
                         "message": error.error.message,
