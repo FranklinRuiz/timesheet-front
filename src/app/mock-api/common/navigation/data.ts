@@ -13,7 +13,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
         id: 'tipoTrabajo',
         title: 'Tipo de Trabajo',
         type: 'basic',
-        icon: 'heroicons_outline:office-building',
+        icon: 'heroicons_outline:clipboard-list',
         link: '/tipoTrabajo'
     },
     {
@@ -22,6 +22,13 @@ export const defaultNavigation: FuseNavigationItem[] = [
         type: 'basic',
         icon: 'heroicons_outline:user-group',
         link: '/personal'
+    },
+    {
+        id: 'sede',
+        title: 'Sedes',
+        type: 'basic',
+        icon: 'heroicons_outline:office-building',
+        link: '/sede'
     },
     {
         id: 'diaFestivo',
@@ -68,7 +75,7 @@ export const horizontalNavigation: FuseNavigationItem[] = [
         id: 'tipoTrabajo',
         title: 'Tipo de Trabajo',
         type: 'basic',
-        icon: 'heroicons_outline:office-building',
+        icon: 'heroicons_outline:clipboard-list',
         link: '/tipoTrabajo'
     },
     {
@@ -77,6 +84,13 @@ export const horizontalNavigation: FuseNavigationItem[] = [
         type: 'basic',
         icon: 'heroicons_outline:user-group',
         link: '/personal'
+    },
+    {
+        id: 'sede',
+        title: 'Sedes',
+        type: 'basic',
+        icon: 'heroicons_outline:office-building',
+        link: '/sede'
     },
     {
         id: 'diaFestivo',
