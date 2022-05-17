@@ -1,7 +1,8 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { GeneralPage } from 'app/shared/interface-paginator';
 import { environment } from 'environments/environment';
-import { ITipoTrabajo, TipoTrabajoPage } from '../interfaces/tipo-trabajo';
+import { ITipoTrabajo } from '../interfaces/tipo-trabajo';
 
 @Injectable({
   providedIn: 'root'
@@ -17,12 +18,13 @@ export class TipoTrabajoService {
 
   
 
-  listTipoTrabajo(pagina: number, size: number) {
+  listTipoTrabajo(pagina: number, size: number, nombre: string) {
     let params = new HttpParams();
     params = params.append('page', pagina);
     params = params.append('size', size);
+    params = params.append('nombre', nombre);
     params = params.append('sort', 'idTipoTrabajo,desc');
-    return this.http.get<TipoTrabajoPage>(`${this.url}/api/tipo-trabajo/list`, { params: params });
+    return this.http.get<GeneralPage>(`${this.url}/api/tipo-trabajo/list`, { params: params });
   }
 
   saveTipoTrabajo(values: ITipoTrabajo) {
@@ -31,7 +33,7 @@ export class TipoTrabajoService {
 
 
   updateTipoTrabajo(values: ITipoTrabajo) {
-    return this.http.post(`${this.url}/api/tipo-trabajo/update`, values);
+    return this.http.put(`${this.url}/api/tipo-trabajo/update`, values);
   }
   
   deleteTipoTrabajo(idTipoTrabajo: number) {

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
-import { ITipoTrabajo, TipoTrabajoPage } from '../interfaces/tipo-trabajo';
+import { FuseConfirmationService } from '@fuse/services/confirmation';
+import { GeneralPage } from 'app/shared/interface-paginator';
+import { ITipoTrabajo } from '../interfaces/tipo-trabajo';
 import { RegistroTipoTrabajoComponent } from '../registro-tipo-trabajo/registro-tipo-trabajo.component';
 import { TipoTrabajoService } from '../services/tipo-trabajo.service';
 
@@ -14,36 +16,29 @@ export class BandejaTipoTrabajoComponent implements OnInit {
 
   displayedColumnsTipoTrabajo : string[] = ['idTipoTrabajo', 'abreviatura', 'nombreTipoTrabajo', 'accion'];
   dataSourceTipoTrabajo: any[];
+ 
+  tableTipoTrabajo: GeneralPage;
 
-  tabletipoTrabajo : TipoTrabajoPage;
+  nombreTipoTrabajo : string ="";
   pagina: number = 0;
   size: number = 10;
 
   constructor(
     public dialog : MatDialog,
-    private apiService : TipoTrabajoService
+    private apiService : TipoTrabajoService,
+    private _fuseConfirmationService: FuseConfirmationService
   ) { }
  
   ngOnInit(): void {
     this.onLoadTableTipoTrabajo();
   }
 
-
-  onLoadTableTipoTrabajo(){
-    this.apiService.listTipoTrabajo(this.pagina, this.size).subscribe((resp) => {
-      console.log('resp de tipo trabajo', resp);
-      this.tabletipoTrabajo = resp.data;
-    })
+  onRefresh() {
+    this.nombreTipoTrabajo = '';
+    this.onLoadTableTipoTrabajo();
   }
 
-  onChangePagination(event: PageEvent) {
-    this.pagina = event.pageIndex;
-    this.size = event.pageSize;
 
-    this.apiService.listTipoTrabajo(this.pagina, this.size).subscribe((resp) => {
-      this.tabletipoTrabajo = resp.data;
-    });
-  }
 
   onAddTipoTrabajo(){
     const dialgoref = this.dialog.open(RegistroTipoTrabajoComponent,{
@@ -57,10 +52,26 @@ export class BandejaTipoTrabajoComponent implements OnInit {
     })
   }
 
+  onLoadTableTipoTrabajo(){
+    this.apiService.listTipoTrabajo(this.pagina, this.size, this.nombreTipoTrabajo).subscribe((resp) => {
+      console.log('resp de tipo trabajo', resp.data);
+      this.tableTipoTrabajo = resp.data;
+    })
+  }
+ 
 
-  onEditTipoTrabajo(data: ITipoTrabajo) {
-    console.log('que vamos a editar', data);
-    console.log('que vamos a  editar idTipoTrabajo', data.idTipoTrabajo);
+  onChangePagination(event: PageEvent) {
+    this.pagina = event.pageIndex;
+    this.size = event.pageSize;
+
+    this.apiService.listTipoTrabajo(this.pagina, this.size, this.nombreTipoTrabajo).subscribe((resp: any) => {
+      this.tableTipoTrabajo = resp.data;
+    });
+  }
+
+
+
+  onEdit(data: ITipoTrabajo) { 
     const dialogRef = this.dialog.open(RegistroTipoTrabajoComponent, {
       width: '500px',
       data: data
@@ -73,10 +84,18 @@ export class BandejaTipoTrabajoComponent implements OnInit {
   }
 
 
-  onDeleteTipoTrabajo(idTipoTrabajo: number) {
  
-  }
-
+  onDelete(idTipoTrabajo: number) {
+      const dialogRef = this._fuseConfirmationService.delete();
+  
+      dialogRef.afterClosed().subscribe((result) => {
+        if (result == 'confirmed') {
+          this.apiService.deleteTipoTrabajo(idTipoTrabajo).subscribe((resp) => {
+            this.onLoadTableTipoTrabajo();
+          });
+        }
+      });
+    }
 
 
 

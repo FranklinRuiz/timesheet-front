@@ -37,8 +37,7 @@ export class RegistroTipoTrabajoComponent implements OnInit {
   }
 
 
-  onSave(): void {
-
+  onSave(): void { 
     if (!this.form.valid) {
       this.matSnackBar.open(
         'Por favor, completa el formulario.',
@@ -55,23 +54,30 @@ export class RegistroTipoTrabajoComponent implements OnInit {
       abreviatura: data.abreviatura,
       nombreTipoTrabajo: data.nombreTipoTrabajo, 
     };
-
     if (!this.data) {
-      this.mensaje = 'tipo de trabajo registrado con éxito.';
+      this.mensaje = 'Sede registrada con éxito.';
+      this.apiService.saveTipoTrabajo(newTipoTrabajo).subscribe((response) => {
+        if (response) {
+          this.matSnackBar.open(
+            this.mensaje,
+            'Cerrar',
+            { duration: 3000, verticalPosition: 'top', horizontalPosition: 'end' }
+          );
+          this.dialogRef.close(true);
+        }
+      });
     } else {
-      this.mensaje = 'tipo de trabajo actualizado con éxito.';
+      this.mensaje = 'Sede actualizada con éxito.';
+      this.apiService.updateTipoTrabajo(newTipoTrabajo).subscribe((response) => {
+        if (response) {
+          this.matSnackBar.open(
+            this.mensaje,
+            'Cerrar',
+            { duration: 3000, verticalPosition: 'top', horizontalPosition: 'end' }
+          );
+          this.dialogRef.close(true);
+        }
+      });
     }
-
-    this.apiService.saveTipoTrabajo(newTipoTrabajo).subscribe((response) => {
-      if (response) {
-        this.matSnackBar.open(
-          this.mensaje,
-          'Cerrar',
-          { duration: 3000, verticalPosition: 'top', horizontalPosition: 'end' }
-        );
-        this.dialogRef.close(true);
-      }
-    });
-
   }
 }

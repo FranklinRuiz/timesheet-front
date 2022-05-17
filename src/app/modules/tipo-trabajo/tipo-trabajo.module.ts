@@ -5,6 +5,7 @@ import { TipoTrabajoRoutingModule } from './tipo-trabajo-routing.module';
 import { BandejaTipoTrabajoComponent } from './bandeja-tipo-trabajo/bandeja-tipo-trabajo.component';
 import { RegistroTipoTrabajoComponent } from './registro-tipo-trabajo/registro-tipo-trabajo.component';
 import { MaterialModule } from 'app/shared/material/material.module';
+import { SharedModule } from 'app/shared/shared.module';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { MaterialModule } from 'app/shared/material/material.module';
   imports: [
     CommonModule,
     TipoTrabajoRoutingModule,
-    MaterialModule
+    MaterialModule,
+    SharedModule
   ]
 })
 export class TipoTrabajoModule { }
