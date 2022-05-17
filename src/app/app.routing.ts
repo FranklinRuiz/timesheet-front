@@ -75,6 +75,7 @@ export const appRoutes: Route[] = [
             { path: 'personal', loadChildren: () => import('app/modules/personal/personal.module').then(m => m.PersonalModule) },
             { path: 'diaFestivo', loadChildren: () => import('app/modules/dia-festivo/dia-festivo.module').then(m => m.DiaFestivoModule) },
             { path: 'horario', loadChildren: () => import('app/modules/horario/horario.module').then(m => m.HorarioModule) },
+            { path: 'sede', loadChildren: () => import('app/modules/sede/sede.module').then(m => m.SedeModule) },
         ]
     },
 ];

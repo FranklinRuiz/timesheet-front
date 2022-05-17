@@ -11,7 +11,7 @@ import { appConfig } from 'app/core/config/app.config';
 import { mockApiServices } from 'app/mock-api';
 import { LayoutModule } from 'app/layout/layout.module';
 import { AppComponent } from 'app/app.component';
-import { appRoutes } from 'app/app.routing';
+import { appRoutes } from 'app/app.routing'; 
 
 const routerConfig: ExtraOptions = {
     preloadingStrategy       : PreloadAllModules,
