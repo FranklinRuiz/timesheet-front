@@ -23,7 +23,7 @@
 
             <mat-form-field class="fuse-mat-no-subscript w-full mt-4">
                 <mat-label>Descripcion</mat-label>
-                <input type="text" matInput formControlName="descripcion">
+                <textarea type="text" matInput formControlName="descripcion"></textarea>
             </mat-form-field>
             <mat-error *ngIf="form.controls['descripcion'].errors?.required &&  form.controls['descripcion'].touched">
                 Descripcion es obligatorio

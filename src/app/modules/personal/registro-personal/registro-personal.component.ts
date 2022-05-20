@@ -14,6 +14,7 @@ export class RegistroPersonalComponent implements OnInit {
 
   form: FormGroup;
   mensaje: string = "";
+  titulo: string = "Registro Personal";
 
   tiposDocumento = [];
   tiposGenero = [];
@@ -26,6 +27,9 @@ export class RegistroPersonalComponent implements OnInit {
     private apiService: PersonalService,
     private matSnackBar: MatSnackBar
   ) {
+    if (!!data) {
+      this.titulo = "Actualizar Personal";
+    }
     this.builform();
   }
 
