@@ -2,11 +2,11 @@ version: '3'
 
 services:
   api:
-    container_name: sgsi-frontend
-    image: sgsi-frontend
+    container_name: timesheet-frontend
+    image: timesheet-frontend
     build:
       context: ./
       dockerfile: Dockerfile
     ports:
-      - 80:80
+      - 81:81
     restart: always
