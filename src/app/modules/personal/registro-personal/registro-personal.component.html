@@ -73,7 +73,7 @@
                 </div>
             </div>
 
-            <div class="grid sm:grid-cols-2 gap-6 w-full mt-3">
+            <div class="grid sm:grid-cols-3 gap-6 w-full mt-3">
                 <div class="sm:col-span-1">
                     <mat-form-field class="fuse-mat-no-subscript w-full">
                         <mat-label>Fecha Nacimiento</mat-label>
@@ -97,6 +97,20 @@
                     </mat-form-field>
                     <mat-error *ngIf="form.controls['sexo'].errors?.required && form.controls['sexo'].touched">
                         Genero es obligatorio
+                    </mat-error>
+                </div>
+                <div class="sm:col-span-1">
+                    <mat-form-field class="fuse-mat-no-subscript w-full">
+                        <mat-label>Área</mat-label>
+                        <mat-select formControlName="idArea" placeholder="Seleccione una opción">
+                            <mat-option *ngFor="let a of areas" [value]="a.idArea">
+                                {{a.nombreArea}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-error
+                        *ngIf="form.controls['idArea'].errors?.required && form.controls['idArea'].touched">
+                        Area es obligatorio
                     </mat-error>
                 </div>
             </div>

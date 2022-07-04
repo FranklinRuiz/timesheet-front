@@ -2,3 +2,218 @@
 /*  @ Import/write your custom styles here.
 /*  @ Styles from this file will override 'vendors.scss' and Fuse's base styles.
 /* ----------------------------------------------------------------------------------------------------- */
+.GrillasDashboardGeneral{ 
+  display: grid;
+  grid-column-gap: 1%; 
+  row-gap: 10%;
+  grid-template-columns: 1fr 1fr 1fr 1fr; 
+
+  @media (max-width : 1000px){ 
+    row-gap: 1%;
+    height: 25vh;
+    grid-template-columns:  1fr 1fr 1fr;
+}
+
+    @media (max-width : 800px){ 
+      grid-template-columns: 1fr 1fr;
+      grid-row-gap: 1%;
+      row-gap: 1%;
+      height: 45vh;
+    }
+
+    @media (max-width : 400px){ 
+      grid-template-columns: 1fr;
+      grid-row-gap: 1%;
+      row-gap: 1%;
+      height: 65vh;
+    }
+}
+
+.divGeneral{
+  display: grid; 
+  row-gap: 1%;
+  grid-template-columns: 1fr;
+  height: 100vh;
+
+  @media (max-width : 600px){ 
+    grid-template-columns:  1fr;
+}
+
+}
+
+.GrillasIndicadorGeneral{ 
+    display: grid;
+    column-gap: 2%;
+    grid-row-gap: 3%;
+    grid-template-columns: repeat(4, 110px);
+    justify-items: center;
+    text-align: center; 
+    align-items: center;
+    box-shadow: 0 0 1px black !important
+}
+
+
+.CardBoton{
+  // display: grid;
+  // align-items: center;
+  // grid-template-columns: 80% 20%;
+  // box-shadow: 0 0 1px black !important;
+  display: grid;
+  align-items: center;
+  grid-template-columns: 70% 30%; 
+  box-shadow: 1px 1px 1px 0px !important;
+}
+ 
+/* BLOQUE 2*/
+
+.circle-wrap2 { 
+  width: 100px;
+  height: 100px;
+  background: #d9d7da;
+  border-radius: 50%;
+  text-align: center;
+}
+.circle-wrap2 .circle2 .mask2,
+.circle-wrap2 .circle2 .fill-2 {
+  width: 100px;
+  height: 99px;
+  position: absolute;
+  border-radius: 50%;
+}
+ .Nombrechart2{
+  font-size: 15px;
+}
+.circle-wrap2 .inside-circle2 {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: white; 
+  text-align: center;
+  margin-top: 9px;
+  margin-left: 11px;
+  color: #212020;
+  position: absolute;
+  z-index: 100;
+  font-weight: 700;
+  font-size: 2em;
+}
+
+
+/* BLOQUE 2*/
+
+.circle-wrap { 
+  width: 100px;
+  height: 100px;
+  background: #d9d7da;
+  border-radius: 50%;
+  text-align: center;
+}
+.circle-wrap .circle .mask,
+.circle-wrap .circle .fill-1 {
+  width: 100px;
+  height: 99px;
+  position: absolute;
+  border-radius: 50%;
+}
+ .Nombrechart{
+  font-size: 15px;
+}
+.circle-wrap .inside-circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: white; 
+  text-align: center;
+  margin-top: 9px;
+  margin-left: 11px;
+  color: #212020;
+  position: absolute;
+  z-index: 100;
+  font-weight: 700;
+  font-size: 2em;
+}
+
+ 
+
+.PrimerGrid{
+  display: grid;
+  text-align: center;
+  align-items: center;
+  // grid-column-gap: 5%;
+  column-gap: 5%;
+  grid-row-gap: 2%;
+  grid-template-columns: 40% 50%;
+  // width: 100%; 
+  justify-content: center;
+ 
+  @media (max-width : 800px){
+    display: grid;
+    grid-template-columns:  100%;
+  }
+
+
+}
+
+
+// display: grid; 
+// grid-column-gap: 5%;
+// column-gap: 5%;
+// grid-row-gap: 2%;
+// grid-template-columns: 30% 30% 30%;
+// width: 100%; 
+// justify-items: center;
+
+.SegundoGrid{
+  display: grid; 
+  grid-column-gap: 5%;
+  column-gap: 5%;
+  grid-row-gap: 2%;
+  grid-template-columns: 30% 30% 30%;
+  width: 100%; 
+  justify-items: center;
+}
+
+.SegundoGrid2{
+  display: grid; 
+  grid-column-gap: 5%;
+  column-gap: 5%;
+  grid-row-gap: 2%;
+  grid-template-columns: 30% 30% 30%;
+  width: 100%; 
+  justify-items: center;
+
+  @media (max-width : 400px){ 
+    grid-template-columns:  100%;
+  }
+
+}
+
+
+
+.GrillasIndicadorHorasTrabajadas{
+  display: grid;
+  column-gap: 1%;
+  grid-row-gap:1%;
+  grid-template-columns: repeat(3, 100px);
+  justify-items: center;
+  text-align: center; 
+  align-items: center;
+}
+
+.centrar{
+  text-align: center;
+}
+
+.InfoHorasPorSede{
+  display: grid;
+  align-items: center;
+  grid-template-columns: 80% 20%;
+  text-align: left;
+  margin-top: 5%;
+
+  @media (max-width : 800px){ 
+    grid-template-columns:  100%;
+    text-align: center;
+  }
+
+}

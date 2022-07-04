@@ -20,6 +20,7 @@ export class RegistroPersonalComponent implements OnInit {
   tiposGenero = [];
   horarios = [];
   cargos = [];
+  areas = [];
 
   constructor(
     public dialogRef: MatDialogRef<RegistroPersonalComponent>,
@@ -38,6 +39,7 @@ export class RegistroPersonalComponent implements OnInit {
     this.onListTipoGenero();
     this.onListHorario();
     this.onListcargo();
+    this.onListAreas();
   }
 
   private builform(): void {
@@ -49,6 +51,7 @@ export class RegistroPersonalComponent implements OnInit {
       apellidoMaterno: new FormControl(this.data?.apellidoMaterno, Validators.required),
       fechaNacimiento: new FormControl(this.data?.fechaNacimiento, Validators.required),
       sexo: new FormControl(+this.data?.sexo, Validators.required),
+      idArea: new FormControl(+this.data?.idArea, Validators.required),
       idCargo: new FormControl(this.data?.idCargo, Validators.required),
       idHorario: new FormControl(this.data?.idHorario, Validators.required),
       telefono: new FormControl(this.data?.telefono, Validators.required),
@@ -81,6 +84,13 @@ export class RegistroPersonalComponent implements OnInit {
     })
   }
 
+  onListAreas() {
+    this.apiService.listArea().subscribe((response: any) => {
+      this.areas = response.data
+    })
+  }
+
+
   onSave(): void {
     if (!this.form.valid) {
       this.matSnackBar.open(
@@ -102,6 +112,7 @@ export class RegistroPersonalComponent implements OnInit {
       apellidoMaterno: data.apellidoMaterno,
       fechaNacimiento: data.fechaNacimiento,
       sexo: data.sexo,
+      idArea:  data.idArea,
       idCargo: data.idCargo,
       idHorario: data.idHorario,
       telefono: data.telefono,

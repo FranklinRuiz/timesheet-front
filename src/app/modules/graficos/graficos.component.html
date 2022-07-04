@@ -1,0 +1,161 @@
+<div class="flex flex-col flex-auto min-w-0 p-10">
+
+    <!-- Header -->
+    <div class="bg-card">
+        <div class=" max-w-screen-xl mx-auto px-6 sm:px-8">
+            <div class="sm:flex-row flex-auto sm:items-center min-w-0 my-8"> 
+                <div class="bg-card m-4"> 
+                    <div>  
+                        <div class="centrar">
+                            <h2> <strong class="textIcon"> Reportes (xlxs - pdf) </strong></h2>
+                
+                            <div class="GrillasDashboardGeneral pt-2">
+                                <div class="CardBoton bg-card p-1">
+                                    <strong> Importar Asistencias </strong>   
+                                    <button class="mx-2" mat-mini-fab [color]="'primary'" type="button" mat-raised-button (click)="fileInput.click()">
+                                        <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:cloud-upload'"></mat-icon>
+                                    </button>
+                                    <input hidden (change)="onImportarAsistencias($event)" #fileInput type="file" id="file">
+                                </div>   
+                
+                                <div class="CardBoton bg-card p-1">
+                                    <strong>  Horas de Trabajo </strong>  
+                                    <button class="mx-2" mat-mini-fab [color]="'primary'" (click)="onExpReporteHoras('HTRAB')">
+                                        <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:cloud-upload'"></mat-icon>
+                                    </button>  
+                                </div>   
+                
+                                <div class="CardBoton bg-card p-1">
+                                    <strong> Horas Extra </strong> 
+                                    <button class="mx-2" mat-mini-fab [color]="'primary'" (click)="onExpReporteHoras('HEXT')">
+                                        <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:cloud-download'"></mat-icon>
+                                    </button>  
+                                </div>
+                                
+                                <div class="CardBoton bg-card p-1"> 
+                                    <strong> Horas Tardanza </strong> 
+                                    <button class="mx-2" mat-mini-fab [color]="'primary'" (click)="onExpReporteHoras('HTARD')">
+                                        <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:cloud-download'"></mat-icon>
+                                    </button>   
+                                </div>    
+                
+                                <div class="CardBoton bg-card p-1">
+                                    <strong>  Inasistencias </strong>  
+                                    <button class="mx-2" mat-mini-fab [color]="'primary'">
+                                        <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:cloud-upload'"></mat-icon>
+                                    </button>  
+                                </div>   
+                
+                                <div class="CardBoton bg-card p-1">
+                                    <strong> Turnos </strong> 
+                                    <button class="mx-2" mat-mini-fab [color]="'primary'" (click)="onExpReporteTurno()">
+                                        <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:cloud-download'"></mat-icon>
+                                    </button>  
+                                </div>
+                                
+                                <div class="CardBoton bg-card p-1"> 
+                                    <strong> Asistencias</strong> 
+                                    <button class="mx-2" mat-mini-fab [color]="'primary'">
+                                        <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:cloud-download'"></mat-icon>
+                                    </button>   
+                                </div>  
+                
+                                <div class="CardBoton bg-card p-1"> 
+                                    <strong> Reporte General</strong> 
+                                    <button class="mx-2" mat-mini-fab [color]="'primary'" (click)="onExpReporteGeneral('EXCEL')">
+                                        XLSX
+                                    </button>   
+                                </div>    
+                
+                                <div class="CardBoton bg-card p-1"> 
+                                    <strong> Reporte General</strong> 
+                                    <button class="mx-2" mat-mini-fab [color]="'primary'" (click)="onExpReporteGeneral('PDF')">
+                                        PDF 
+                                    </button>   
+                                </div>   
+                
+                            </div>  
+                        </div>
+                    </div>
+                </div>   
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-card">
+        <div class="max-w-screen-xl mx-auto px-6 sm:px-8">
+            <div class="sm:flex-row flex-auto sm:items-center min-w-0 my-8"> 
+                 
+                <div class="bg-card mt-2 mx-2 px-2"> 
+                    <div class="PrimerGrid mx-2">  
+                        <div>
+                            <h2> <strong class="textIcon"> Indicadores de Personas </strong></h2>
+                            <br>
+                            <div class="SegundoGrid">
+                                <div class="circle-wrap"  *ngFor="let dp of totalPersonas"> 
+                                    <div class="circle">
+                                        <div class="mask full-1">
+                                            <div class="fill-1"></div>
+                                        </div>
+                                        <div class="mask half">
+                                            <div class="fill-1" [style.background-color]="dp.color" ></div>
+                                        </div>
+                                        <div class="inside-circle"> 
+                                            <div> {{dp.valor}} </div> 
+                                            <div class="Nombrechart"> {{dp.nombre}} </div>   
+                                        </div>
+                                    </div>  
+                                </div> 
+                            </div> 
+                        </div> 
+                            
+                        <div>
+                            <br>
+                            <h2> <strong class="textIcon"> Indicadores de Personas Por Area </strong></h2>
+                            
+                            <canvas baseChart
+                                [data]="dataPersonasPorAreaGrafico"
+                                [options]="horizontalOptions" 
+                                [legend]="false" 
+                                type="bar" >
+                            </canvas>
+                        </div>
+                    </div>     
+                </div>  
+            </div>
+        </div>
+    </div>
+
+
+    <div class="bg-card">
+        <div class="max-w-screen-xl mx-auto px-6 sm:px-8">
+            <div class="sm:flex-row flex-auto sm:items-center min-w-0 my-8"> 
+                <div class="bg-card centrar mt-2 mx-2 px-2 mb-4"> 
+                    <br>
+                    <h2> <strong class="textIcon"> Indicadores de Horas de Trabajado Por Sede </strong></h2>
+                    <br>
+                    <div class="SegundoGrid2 mx-2">  
+                        <div *ngFor="let h of dataHorasPorSede"> 
+                            <button class="mx-2" mat-raised-button [color]="'primary'">
+                                {{h.sede}} 
+                            </button>  
+                            
+                            <div class="InfoHorasPorSede">
+                                <strong> H. TRABAJADAS: </strong>
+                                <p> {{ h.htrabajadas }} </p>  
+                
+                                <strong> H. EXTRA:  </strong> 
+                                <p> {{ h.hextra }} </p>  
+                
+                                <strong> H. TARDANZAS: </strong>
+                                <p> {{ h.htardanza }} </p>   
+                            </div>   
+                        </div>     
+                    </div>
+                </div> 
+            </div>
+        </div>
+    </div>
+
+</div>
+ 

@@ -49,4 +49,8 @@ export class PersonalService {
   listCargo() {
     return this.http.get(`${this.url}/api/cargo/list-all`);
   }
+
+  listArea() {
+    return this.http.get(`${this.url}/api/area/list-all`);
+  }
 }
