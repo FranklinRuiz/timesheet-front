@@ -43,6 +43,13 @@ export const defaultNavigation: FuseNavigationItem[] = [
         type: 'basic',
         icon: 'heroicons_outline:clock',
         link: '/horario'
+    },
+    {
+        id: 'asistencia',
+        title: 'Asistencia',
+        type: 'basic',
+        icon: 'heroicons_outline:device-mobile',
+        link: '/asistencia'
     }
 ];
 export const compactNavigation: FuseNavigationItem[] = [
@@ -105,5 +112,12 @@ export const horizontalNavigation: FuseNavigationItem[] = [
         type: 'basic',
         icon: 'heroicons_outline:clock',
         link: '/horario'
+    },
+    {
+        id: 'asistencia',
+        title: 'Asistencia',
+        type: 'basic',
+        icon: 'heroicons_outline:device-mobile',
+        link: '/asistencia'
     }
 ];
