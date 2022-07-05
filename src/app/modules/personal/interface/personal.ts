@@ -8,6 +8,7 @@ export interface Personal {
     fechaNacimiento: Date;
     sexo: string;
     idCargo: number;
+    idArea: number;
     idHorario: number;
     telefono: string;
     correo: string;

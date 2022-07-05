@@ -50,6 +50,13 @@ export const defaultNavigation: FuseNavigationItem[] = [
         type: 'basic',
         icon: 'heroicons_outline:device-mobile',
         link: '/asistencia'
+    },
+    {
+        id: 'dashboard',
+        title: 'Dashboard',
+        type: 'basic',
+        icon: 'heroicons_outline:chart-bar',
+        link: '/dashboard'
     }
 ];
 export const compactNavigation: FuseNavigationItem[] = [
@@ -119,5 +126,11 @@ export const horizontalNavigation: FuseNavigationItem[] = [
         type: 'basic',
         icon: 'heroicons_outline:device-mobile',
         link: '/asistencia'
+    }, {
+        id: 'dashboard',
+        title: 'Dashboard',
+        type: 'basic',
+        icon: 'heroicons_outline:chart-bar',
+        link: '/dashboard'
     }
 ];
