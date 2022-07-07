@@ -9,6 +9,7 @@ import { ReportesService } from './service/reporte.service';
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable"
 import { MatSnackBar } from '@angular/material/snack-bar';
+import moment from 'moment';
 
 
 @Component({
@@ -29,9 +30,12 @@ export class GraficosComponent implements OnInit {
   dataHorasPorSede : IndHorasPorSede[]=[]; 
   mostrarHorasPorSede: any[]=[];
   totalHoras :any[] = [];
- 
+  fechaActual = new Date();
   cols : any[]=[];
   arrayAsistencias: any[]=[];
+
+  f1 = new Date(this.fechaActual.getFullYear(), this.fechaActual.getMonth(), 1);
+  f2 = new Date(this.fechaActual.getFullYear(), this.fechaActual.getMonth() + 1, 0);
 
   constructor(
     private apiService : GraficosService,
@@ -68,7 +72,11 @@ export class GraficosComponent implements OnInit {
   }
 
   onIndicadorPersonas(){
-    this.apiService.IndPersonas().subscribe((resp) => { 
+    const filtro = {
+      f1 :  moment(this.f1).format('YYYY-MM-DD'), 
+      f2 :  moment(this.f2).format('YYYY-MM-DD')
+    }
+    this.apiService.IndPersonas(filtro).subscribe((resp) => { 
       if(resp.data){
         this.dataPersonas = resp.data[0];
         this.onLlenarDataPersonas();
@@ -86,7 +94,11 @@ export class GraficosComponent implements OnInit {
 
 
   onIndicadorPersonasPorArea(){
-    this.apiService.IndPersonasPorArea().subscribe((resp) => { 
+    const filtro = {
+      f1 :  moment(this.f1).format('YYYY-MM-DD'), 
+      f2 :  moment(this.f2).format('YYYY-MM-DD')
+    }
+    this.apiService.IndPersonasPorArea(filtro).subscribe((resp) => { 
       if(resp){
         this.dataPersonasPorArea = resp.data;
         this.onLlenarDataPersonasPorArea();
@@ -117,9 +129,22 @@ export class GraficosComponent implements OnInit {
 
 
   onIndicadorHorasPorSede(){
-    this.apiService.IndHorasPorSedes().subscribe((resp) => { 
-      if(resp.data){
+    const filtro = {
+      f1 :  moment(this.f1).format('YYYY-MM-DD'), 
+      f2 :  moment(this.f2).format('YYYY-MM-DD')
+    }
+    this.apiService.IndHorasPorSedes(filtro).subscribe((resp) => { 
+      if(resp.data.length){
         this.dataHorasPorSede = resp.data;
+      }else{
+        this.dataHorasPorSede =  [
+          {
+          sede : "Sin datos",
+          htrabajadas : "00:00:00",
+          hextra : "00:00:00",
+          htardanza : "00:00:00"
+          }
+        ]
       }
     }); 
   }
@@ -154,18 +179,8 @@ export class GraficosComponent implements OnInit {
         { duration: 3000, verticalPosition: 'top', horizontalPosition: 'end' }
       );
       return;
-    }
- 
-     
+    } 
   }
- 
-  numeroAFecha(num, esExcel = false) {
-    var newFecha = esExcel ? 25567 + 1 : 25567;
-    // 86400 es el número de segundos en un día, luego multiplicamos por 1000 para obtener milisegundos.
-    return new Date((num - newFecha) * 86400 * 1000);
-  }
-
-
   
   onArmarJsonaGuardar(head, body){
     this.arrayAsistencias = []; 
@@ -184,63 +199,86 @@ export class GraficosComponent implements OnInit {
     this.apiReportes.importarAsistencias(data).subscribe((resp) => {
       if(resp){
         this.matSnackBar.open(
-          'Se importo el excel de asistencias sin problemas!.',
+          'Archivo cargado correctamente',
           'Cerrar',
           { duration: 3000, verticalPosition: 'top', horizontalPosition: 'end' }
         );
       }
+    }, error => {
+      this.matSnackBar.open(
+        'Archivo cargado incorrectamente',
+        'Cerrar',
+        { duration: 3000, verticalPosition: 'top', horizontalPosition: 'end' }
+      );
     })
   }
-  // onExpReporte(filter : any){
-  // const dialgoref = this.dialog.open(FiltroReporteComponent,{
-  //   width: '500px',
-  //   data: filter
-  // }); 
 
-  // dialgoref.afterClosed().subscribe((resp) => {
-  //   if(resp){
-  //     this.ngOnInit();
-  //   }
-  // })
-  // }
-  
+
+  onFilter(tipo){
+  const dialgoref = this.dialog.open(FiltroReporteComponent,{
+    width: '500px',
+    data: tipo
+  }); 
+
+  dialgoref.afterClosed().subscribe((resp) => {
+    if(resp){
+      this.f1 = resp.inicio,
+      this.f2 = resp.fin
+
+      if(resp.tipo === 'IPersonas'){
+        this.totalPersonas = [];
+        this.onIndicadorPersonas();
+      }else if(resp.tipo === 'IHoras'){
+        this.onIndicadorHorasPorSede();
+      }else if(resp.tipo === 'IPersonasAreas'){
+        this.onIndicadorPersonasPorArea();
+      }
+   
+      }
+    })
+  }
+
+
+  onExporAsistencias(){  
+    this.apiReportes.repInasistencias().subscribe((resp) => {  
+      if(resp){  
+        this.onDescargarExcel(resp.data);
+      }    
+    }) 
+  }
+
+  onExporInasistencias(){  
+    this.apiReportes.repAsistencias().subscribe((resp) => {  
+      if(resp){  
+        this.onDescargarExcel(resp.data);
+      }    
+    }) 
+  }
+
 
   onExpReporteHoras(filter : any){
-    const Params = {
-      idsede :  0,
-      idturno: 0,
-      tipohora: filter,
-    }  
-     
-    this.apiReportes.repHorasTrabajo(Params).subscribe((resp) => { 
-      console.log('resp', resp);
+    const Params = {tipohora: filter}   
+    this.apiReportes.repHorasTrabajo(Params).subscribe((resp) => {  
       if(resp){  
         this.onDescargarExcel(resp.data);
       }    
     }) 
  
   }
-
  
-  onDescargarExcel(listado){   
-    const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(listado);
-    const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
-    const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
-    this.saveAsExcelFile(excelBuffer,  "Reporte.xlsx"); 
-  }
-  
-  saveAsExcelFile(buffer: any, fileName: string): void {
-    const data: Blob = new Blob([buffer], {type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8'});
-    FileSaver.saveAs(data, fileName + '_export_' + new  Date().getTime() + '.xlsx');
-  }
-
-
   onExpReporteTurno(){
     const Params = {idturno: 0}   
     this.apiReportes.repTurnos(Params).subscribe((resp) => {  
-      if(resp){  
+      if(resp.data){  
         this.onDescargarExcel(resp.data);
-      }    
+      }else{
+        this.matSnackBar.open(
+          'No se encontraron resultados',
+          'Cerrar',
+          { duration: 3000, verticalPosition: 'top', horizontalPosition: 'end' }
+        );
+        return;
+      }
     }) 
   }
 
@@ -275,4 +313,15 @@ export class GraficosComponent implements OnInit {
     doc.save('Reporte.pdf');
   }
   
+  onDescargarExcel(listado){   
+    const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(listado);
+    const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+    const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+    this.saveAsExcelFile(excelBuffer,  "Reporte.xlsx"); 
+  }
+  
+  saveAsExcelFile(buffer: any, fileName: string): void {
+    const data: Blob = new Blob([buffer], {type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8'});
+    FileSaver.saveAs(data, fileName + '_export_' + new  Date().getTime() + '.xlsx');
+  }
 }

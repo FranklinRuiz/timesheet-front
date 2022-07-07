@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core'; 
 import { environment } from 'environments/environment';  
 import { DataResponse } from '../interfaces/graficos.interfaces';
@@ -13,18 +13,27 @@ export class GraficosService {
   constructor(private http: HttpClient) { }
 
 
-  IndPersonas() { 
-    return this.http.get<DataResponse>(`${this.url}/api/indicador/datos-personas`);
+  IndPersonas(data: any) { 
+    let params = new HttpParams();
+    params = params.append('FInicio', data.f1); 
+    params = params.append('FFin', data.f2); 
+    return this.http.get<DataResponse>(`${this.url}/api/indicador/datos-personas`, { params });  
   }
 
   
-  IndPersonasPorArea(){ 
-    return this.http.get<DataResponse>(`${this.url}/api/indicador/datos-personas-por-area`);
+  IndPersonasPorArea(data: any){ 
+    let params = new HttpParams();
+    params = params.append('FInicio', data.f1); 
+    params = params.append('FFin', data.f2); 
+    return this.http.get<DataResponse>(`${this.url}/api/indicador/datos-personas-por-area`, { params });  
   }
 
   
-  IndHorasPorSedes() { 
-    return this.http.get<DataResponse>(`${this.url}/api/indicador/datos-horas-por-sede`);
+  IndHorasPorSedes(data: any) { 
+    let params = new HttpParams();
+    params = params.append('FInicio', data.f1); 
+    params = params.append('FFin', data.f2); 
+    return this.http.get<DataResponse>(`${this.url}/api/indicador/datos-horas-por-sede`, { params });  
   }
 
    

@@ -16,27 +16,37 @@ export class ReportesService {
   repGeneral(data: any) {  
     let params = new HttpParams();
     params = params.append('IdSede', data.idsede);
-    params = params.append('IdTurno', data.idturno); 
-    return this.http.get<DataResponse>(`${this.url}/api/reportes/rep-general`, { params: params });
+    params = params.append('IdTurno', data.idturno);  
+    return this.http.get<DataResponse>(`${this.url}/api/reportes/rep-general`, { params });
   }
 
 
   repTurnos(data:any){ 
     let params = new HttpParams();
     params = params.append('IdTurno', data.idturno); 
-    return this.http.get<DataResponse>(`${this.url}/api/reportes/rep-turno`, { params: params }); 
+    return this.http.get<DataResponse>(`${this.url}/api/reportes/rep-turno`, { params }); 
   }
 
   
   repHorasTrabajo(data: any) { 
     let params = new HttpParams();
-    params = params.append('IdSede', data.idsede);
+    if( data.idsede){
+      params = params.append('IdSede', data.idsede);
+    }
     params = params.append('TipoHora', data.tipohora);
-    return this.http.get<DataResponse>(`${this.url}/api/reportes/rep-horas-trabajo`, { params: params });  
+    return this.http.get<DataResponse>(`${this.url}/api/reportes/rep-horas-trabajo`, { params });  
   }
 
   importarAsistencias(data: any) {  
     return this.http.post<any>(`${this.url}/api/asistencia/save`, data);  
+  }
+
+  repAsistencias() {  
+    return this.http.get<DataResponse>(`${this.url}/api/reportes/asistencias`);
+  }
+
+  repInasistencias() {   
+    return this.http.get<DataResponse>(`${this.url}/api/reportes/inasistencias`);
   }
 
 }

@@ -41,7 +41,7 @@
                 
                                 <div class="CardBoton bg-card p-1">
                                     <strong>  Inasistencias </strong>  
-                                    <button class="mx-2" mat-mini-fab [color]="'primary'">
+                                    <button class="mx-2" mat-mini-fab [color]="'primary'" (click)="onExporInasistencias()">
                                         <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:cloud-upload'"></mat-icon>
                                     </button>  
                                 </div>   
@@ -55,7 +55,7 @@
                                 
                                 <div class="CardBoton bg-card p-1"> 
                                     <strong> Asistencias</strong> 
-                                    <button class="mx-2" mat-mini-fab [color]="'primary'">
+                                    <button class="mx-2" mat-mini-fab [color]="'primary'"  (click)="onExporAsistencias()">
                                         <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:cloud-download'"></mat-icon>
                                     </button>   
                                 </div>  
@@ -68,7 +68,7 @@
                                 </div>    
                 
                                 <div class="CardBoton bg-card p-1"> 
-                                    <strong> Reporte General</strong> 
+                                    <strong> Generar Reporte en formato Pdf</strong> 
                                     <button class="mx-2" mat-mini-fab [color]="'primary'" (click)="onExpReporteGeneral('PDF')">
                                         PDF 
                                     </button>   
@@ -85,11 +85,21 @@
     <div class="bg-card">
         <div class="max-w-screen-xl mx-auto px-6 sm:px-8">
             <div class="sm:flex-row flex-auto sm:items-center min-w-0 my-8"> 
-                 
+                
                 <div class="bg-card mt-2 mx-2 px-2"> 
                     <div class="PrimerGrid mx-2">  
+                       
+                         
+                       
                         <div>
-                            <h2> <strong class="textIcon"> Indicadores de Personas </strong></h2>
+                            <div class="FiltrosIndicadores">
+                                <h2> <strong class="textIcon"> Indicadores de Personas   </strong></h2>
+                                <button class="mx-2" mat-mini-fab [color]="'primary'"  (click)="onFilter('IPersonas')">
+                                    <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:filter'"></mat-icon>
+                                </button>    
+                            </div>
+                        
+                       
                             <br>
                             <div class="SegundoGrid">
                                 <div class="circle-wrap"  *ngFor="let dp of totalPersonas"> 
@@ -111,8 +121,14 @@
                             
                         <div>
                             <br>
-                            <h2> <strong class="textIcon"> Indicadores de Personas Por Area </strong></h2>
-                            
+
+                            <div class="FiltrosIndicadores">
+                                <h2> <strong class="textIcon"> Indicadores de Personas Por Area </strong></h2>
+                                <button class="mx-2" mat-mini-fab [color]="'primary'"  (click)="onFilter('IPersonasAreas')">
+                                    <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:filter'"></mat-icon>
+                                </button>    
+                            </div>
+                         
                             <canvas baseChart
                                 [data]="dataPersonasPorAreaGrafico"
                                 [options]="horizontalOptions" 
@@ -132,12 +148,18 @@
             <div class="sm:flex-row flex-auto sm:items-center min-w-0 my-8"> 
                 <div class="bg-card centrar mt-2 mx-2 px-2 mb-4"> 
                     <br>
-                    <h2> <strong class="textIcon"> Indicadores de Horas de Trabajado Por Sede </strong></h2>
+                    <div class="FiltrosIndicadores">
+                        <h2> <strong class="textIcon"> Indicadores de Horas de Trabajado Por Sede </strong></h2>
+                        <button class="mx-2" mat-mini-fab [color]="'primary'"  (click)="onFilter('IHoras')">
+                            <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:filter'"></mat-icon>
+                        </button>    
+                    </div>
+
                     <br>
                     <div class="SegundoGrid2 mx-2">  
                         <div *ngFor="let h of dataHorasPorSede"> 
                             <button class="mx-2" mat-raised-button [color]="'primary'">
-                                {{h.sede}} 
+                                {{h.sede}}   
                             </button>  
                             
                             <div class="InfoHorasPorSede">
