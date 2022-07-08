@@ -240,27 +240,28 @@ export class GraficosComponent implements OnInit {
 
 
   onExporAsistencias(){  
-    this.apiReportes.repInasistencias().subscribe((resp) => {  
+    this.apiReportes.repAsistencias().subscribe((resp) => {  
       if(resp){  
-        this.onDescargarExcel(resp.data);
+        console.log('asistencias',resp);
+        this.onDescargarExcel(resp.data, 'Reporte-Asistencias');
       }    
     }) 
   }
 
   onExporInasistencias(){  
-    this.apiReportes.repAsistencias().subscribe((resp) => {  
+    this.apiReportes.repInasistencias().subscribe((resp) => {  
       if(resp){  
-        this.onDescargarExcel(resp.data);
+        this.onDescargarExcel(resp.data, 'Reporte-Inasistencias');
       }    
     }) 
   }
 
 
   onExpReporteHoras(filter : any){
-    const Params = {tipohora: filter}   
+    const Params = {idsede : 0, tipohora: filter}   
     this.apiReportes.repHorasTrabajo(Params).subscribe((resp) => {  
       if(resp){  
-        this.onDescargarExcel(resp.data);
+        this.onDescargarExcel(resp.data, 'Reporte-Horas');
       }    
     }) 
  
@@ -270,7 +271,7 @@ export class GraficosComponent implements OnInit {
     const Params = {idturno: 0}   
     this.apiReportes.repTurnos(Params).subscribe((resp) => {  
       if(resp.data){  
-        this.onDescargarExcel(resp.data);
+        this.onDescargarExcel(resp.data, 'Reporte-turno');
       }else{
         this.matSnackBar.open(
           'No se encontraron resultados',
@@ -284,14 +285,11 @@ export class GraficosComponent implements OnInit {
 
 
   onExpReporteGeneral(tipo){ 
-    const Params = {
-      idsede :  0,
-      idturno: 0, 
-    }   
+      const Params = {idsede :  0, idturno: 0}   
     this.apiReportes.repGeneral(Params).subscribe((resp) => {  
       if(resp){  
         if(tipo === 'EXCEL'){
-          this.onDescargarExcel(resp.data);
+          this.onDescargarExcel(resp.data, 'Reporte-General');
         }else{
           this.onDescargarPDF(resp.data);
         }
@@ -310,18 +308,18 @@ export class GraficosComponent implements OnInit {
         horizontalPageBreak : true,
         body: data,  
     }); 
-    doc.save('Reporte.pdf');
+    doc.save('Reporte-General.pdf');
   }
   
-  onDescargarExcel(listado){   
+  onDescargarExcel(listado, nomArchivo){   
     const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(listado);
     const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
     const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
-    this.saveAsExcelFile(excelBuffer,  "Reporte.xlsx"); 
+    this.saveAsExcelFile(excelBuffer,  nomArchivo); 
   }
   
   saveAsExcelFile(buffer: any, fileName: string): void {
     const data: Blob = new Blob([buffer], {type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8'});
-    FileSaver.saveAs(data, fileName + '_export_' + new  Date().getTime() + '.xlsx');
+    FileSaver.saveAs(data, fileName +  '.xlsx');
   }
 }

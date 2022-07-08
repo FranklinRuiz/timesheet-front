@@ -30,9 +30,7 @@ export class ReportesService {
   
   repHorasTrabajo(data: any) { 
     let params = new HttpParams();
-    if( data.idsede){
-      params = params.append('IdSede', data.idsede);
-    }
+    params = params.append('IdSede', data.idsede);
     params = params.append('TipoHora', data.tipohora);
     return this.http.get<DataResponse>(`${this.url}/api/reportes/rep-horas-trabajo`, { params });  
   }
@@ -42,11 +40,11 @@ export class ReportesService {
   }
 
   repAsistencias() {  
-    return this.http.get<DataResponse>(`${this.url}/api/reportes/asistencias`);
+    return this.http.get<DataResponse>(`${this.url}/api/reportes/rep-asistencias`);
   }
 
   repInasistencias() {   
-    return this.http.get<DataResponse>(`${this.url}/api/reportes/inasistencias`);
+    return this.http.get<DataResponse>(`${this.url}/api/reportes/rep-inasistencias`);
   }
 
 }
