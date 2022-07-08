@@ -93,7 +93,7 @@ export class AuthSignInComponent implements OnInit {
                     // Set the alert
                     this.alert = {
                         type: 'error',
-                        message: 'Usuario o contraseña incorrecto'
+                        message: 'Credenciales no válidas'
                     };
 
                     // Show the alert
