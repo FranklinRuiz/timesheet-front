@@ -40,7 +40,7 @@ export class RegistroSedeComponent implements OnInit {
   onSave(): void {
     if (!this.form.valid) {
       this.matSnackBar.open(
-        'Por favor, completa el formulario.',
+        'Ingresar datos requeridos',
         'Cerrar',
         { duration: 3000, verticalPosition: 'top', horizontalPosition: 'end' }
       );
