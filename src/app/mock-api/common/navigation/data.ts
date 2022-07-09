@@ -30,13 +30,13 @@ export const defaultNavigation: FuseNavigationItem[] = [
         icon: 'heroicons_outline:office-building',
         link: '/sede'
     },
-    {
-        id: 'diaFestivo',
-        title: 'Dias Festivos',
-        type: 'basic',
-        icon: 'heroicons_outline:calendar',
-        link: '/diaFestivo'
-    },
+    // {
+    //     id: 'diaFestivo',
+    //     title: 'Dias Festivos',
+    //     type: 'basic',
+    //     icon: 'heroicons_outline:calendar',
+    //     link: '/diaFestivo'
+    // },
     {
         id: 'horario',
         title: 'Horarios',
@@ -106,13 +106,13 @@ export const horizontalNavigation: FuseNavigationItem[] = [
         icon: 'heroicons_outline:office-building',
         link: '/sede'
     },
-    {
-        id: 'diaFestivo',
-        title: 'Dias Festivos',
-        type: 'basic',
-        icon: 'heroicons_outline:calendar',
-        link: '/diaFestivo'
-    },
+    // {
+    //     id: 'diaFestivo',
+    //     title: 'Dias Festivos',
+    //     type: 'basic',
+    //     icon: 'heroicons_outline:calendar',
+    //     link: '/diaFestivo'
+    // },
     {
         id: 'horario',
         title: 'Horarios',
