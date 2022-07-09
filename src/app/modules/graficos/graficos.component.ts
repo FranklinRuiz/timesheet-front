@@ -263,6 +263,9 @@ export class GraficosComponent implements OnInit {
     if (filter == 'HEXT') {
       name = 'Reporte-Horas-Extra'
     }
+    if (filter == 'HTARD') {
+      name = 'Reporte-Horas-Tardanza'
+    }
     this.apiReportes.repHorasTrabajo(Params).subscribe((resp) => {
       if (resp) {
         this.onDescargarExcel(resp.data, name);
